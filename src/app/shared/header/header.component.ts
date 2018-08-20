@@ -1,10 +1,10 @@
+import { UiService } from './../services/ui.service';
+import { ConfigLoaderService } from './../../config-loader.service';
+import { Config } from './../../models/config';
 import { StateManager } from './../class/state-manager';
-import { Constants } from '../class/constants';
 import { MainTabs } from '../model/main-tabs';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Language } from 'angular-l10n';
-import { Observable } from 'rxjs';
-import { AngularFirestore } from 'angularfire2/firestore';
 import { Router } from '@angular/router';
 
 @Component({
@@ -16,16 +16,21 @@ import { Router } from '@angular/router';
 export class HeaderComponent implements OnInit {
 
   @Language() lang: string;
-  asyncTabs: Observable<MainTabs[]>;
+  asyncTabs: MainTabs[];
+  private config: Config;
   constructor(
-    private afs: AngularFirestore,
     private route: Router,
-    public state: StateManager
+    public state: StateManager,
+    configLoader: ConfigLoaderService,
+    private uiService: UiService
   ) {
-    this.asyncTabs = this.afs.collection<MainTabs>(Constants.MAIN_TABS).valueChanges();
+    this.config = configLoader.getConfigData();
   }
 
   ngOnInit() {
+    this.uiService.getMainTabs().subscribe((tabs: MainTabs[]) => {
+      this.asyncTabs = tabs;
+    });
   }
 
   gotoRoute(routelink: MainTabs) {

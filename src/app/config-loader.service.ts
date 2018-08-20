@@ -11,7 +11,7 @@ export class ConfigLoaderService {
   private config: Config;
 
   constructor(private http: HttpClient) {
-    this.config = {};
+    this.config = new Config();
   }
 
   public getConfigData(): Config {

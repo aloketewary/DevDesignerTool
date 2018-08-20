@@ -1,3 +1,5 @@
+import { ConfigLoaderService } from './../../config-loader.service';
+import { Config } from './../../models/config';
 import { PaginationService } from '../../services/pagination.service';
 import { Constants } from '../../shared/class/constants';
 import { Language } from 'angular-l10n';
@@ -27,15 +29,18 @@ export class IconsComponent implements OnInit {
 
   selectedIcon: any;
   @Language() lang: string;
+  private config: Config;
   constructor(
     private renderer2: Renderer2,
-    public page: PaginationService
+    public page: PaginationService,
+    configLoader: ConfigLoaderService
   ) {
+    this.config = configLoader.getConfigData();
     this.selectedIcon = { ligature: '' };
   }
 
   ngOnInit() {
-    this.page.init(Constants.ICONS_COLLECTION, 'key', { limit: 1, reverse: false, prepend: false });
+    this.page.init(this.config['ICONS_COLLECTION'], 'key', { limit: 1, reverse: false, prepend: false });
   }
 
   // For Material Card shadow handle not own specific css trick

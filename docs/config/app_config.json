@@ -3,6 +3,6 @@
     "MAIN_TABS" : "main_tabs",
     "LOCALE" : "locale-",
     "ICONS_COLLECTION" : "icons",
-    "APP_CONFIG_LOCATION" : "https: //raw.githubusercontent.com/aloketewary/Material-Color-Tool/master/docs/config/app_config.json",
-    "MAIN_TABS_URL" : "https: //raw.githubusercontent.com/aloketewary/Material-Color-Tool/master/docs/config/main_tabs.json"
+    "APP_CONFIG_LOCATION" : "https://raw.githubusercontent.com/aloketewary/Material-Color-Tool/master/docs/config/app_config.json",
+    "MAIN_TABS_URL" : "https://raw.githubusercontent.com/aloketewary/Material-Color-Tool/master/docs/config/main_tabs.json"
 }
