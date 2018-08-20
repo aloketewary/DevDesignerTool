@@ -1,0 +1,27 @@
+[
+    {
+        "content": "ICONS",
+        "href": "icons",
+        "label": "MAIN.TABS.ICON"
+    },
+    {
+        "content": "FONTS",
+        "href": "font",
+        "label": "MAIN.TABS.FONT"
+    },
+    {
+        "content": "PALLETES",
+        "href": "palletes",
+        "label": "MAIN.TABS.PALLETE"
+    },
+    {
+        "content": "COLORS",
+        "href": "colors",
+        "label": "MAIN.TABS.COLOR"
+    },
+    {
+        "content": "TEMPLATES",
+        "href": "templates",
+        "label": "MAIN.TABS.TEMPLATES"
+    }
+]

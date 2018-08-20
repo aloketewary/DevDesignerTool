@@ -45,7 +45,8 @@ const l10nConfig: L10nConfig = {
   },
   translation: {
     providers: [
-      { type: ProviderType.Static, prefix: './assets/i18n/locale-' }
+      { type: ProviderType.WebAPI, prefix: 'https://aloketewary.github.io/Material-Color-Tool/i18n/locale-' },
+      { type: ProviderType.Fallback, prefix: './assets/i18n/locale-' }
     ],
     caching: true,
     missingValue: 'No key',
