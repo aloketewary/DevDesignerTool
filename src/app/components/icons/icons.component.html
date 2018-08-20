@@ -1,0 +1,38 @@
+<div class="inner-content">
+  <div [ngClass]="{'p-b-1em':true}" fxFlex="80%" fxFlex.lt-md="80%" fxFlex.xs="90%">
+    <ng-container *ngIf="(page.data | async) === null; then thenTemplate; else elseTemplate"></ng-container>
+    <ng-template #thenTemplate>
+      Loading Icons...
+    </ng-template>
+    <ng-template #elseTemplate>
+        <mat-card class="mat-elevation-z6 flex-full" detect-scroll (onScroll)="handleScroll($event)">
+            <mat-card-content>
+              <div *ngFor="let icon of page.data | async;">
+                <div fxLayout="row" fxLayoutAlign="center" class="flex-full">
+                  <span class="f-size-25 roboto f-weight-300 padding-10">{{icon.name | uppercase}}</span>
+                </div>
+                <mat-divider></mat-divider>
+                <div fxLayout="column" fxLayoutAlign="center" class="icon-card-div" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="start center"
+                  fxLayoutWrap>
+                  <mat-card fxFlex.gt-sm="46%" fxFlex.gt-md="23%" fxFlex="80%" [ngClass]="{'icon-card': true, 'bg-blue-grey': getIconSelection(ico?.ligature)}" *ngFor="let ico of icon.icons; let i=index"
+                    (mouseenter)="matElevationAdd($event)" (mouseleave)="matElevationRemove($event)" (click)="selectIcon(ico)">
+                    <mat-card-content>
+                      <div fxLayout="row" fxLayoutAlign="center center" class="flex-full padding-10">
+                        <button mat-fab [color]="getColorsByIconSelection(ico?.ligature)">
+                          <mat-icon class="custom-icon md-36">{{ico.ligature}}</mat-icon>
+                        </button>
+                      </div>
+                      <mat-divider [inset]="true">
+                      </mat-divider>
+                      <div fxLayout="row" fxLayoutAlign="center center" class="flex-full padding-5">
+                          <span [ngClass]="{'icon-card f-size-14 lato f-weight-300': true, 'col-white': getIconSelection(ico?.ligature)}">{{ico.name | uppercase}}</span>
+                      </div>
+                    </mat-card-content>
+                  </mat-card>
+                </div>
+              </div>
+            </mat-card-content>
+          </mat-card>
+    </ng-template>
+  </div>
+</div>

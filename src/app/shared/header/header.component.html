@@ -1,0 +1,17 @@
+<mat-toolbar color="primary">
+  <span class="f-family lato f-size-25">{{'APP.NAME' | translate:lang}}</span>
+  <span class="f-family lato margin-7-l f-size-25">{{'APP.SUBNAME' | translate:lang}}</span>
+  <!-- This fills the remaining space of the current row -->
+  <span class="fill-remaining-space"></span>
+  <span>Right Aligned Text</span>
+</mat-toolbar>
+<ng-container *ngIf="(asyncTabs | async) === null">
+  Loading tabs...
+</ng-container>
+
+<nav mat-tab-nav-bar  mat-stretch-tabs [color]="'primary'" [backgroundColor]="'accent'">
+  <a mat-tab-link  *ngFor="let tab of asyncTabs | async" 
+  (click)="gotoRoute(tab)" [active]="state.activeTab == tab">
+  {{tab?.label | translate:lang}}
+  </a>
+</nav>

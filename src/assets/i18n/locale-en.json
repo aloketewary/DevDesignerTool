@@ -1,0 +1,15 @@
+{
+    "APP": {
+        "NAME": "Material color",
+        "SUBNAME": "tool"
+    },
+    "MAIN": {
+        "TABS": {
+            "COLOR": "Colors",
+            "FONT": "Fonts",
+            "ICON": "Icons",
+            "PALLETE": "Pallete",
+            "TEMPLATES": "Templates"
+        }
+    }
+}
