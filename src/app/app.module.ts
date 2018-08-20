@@ -1,6 +1,8 @@
+import { AuthInterceptorService } from './shared/interceptor/auth-interceptor.service';
+import { ConfigLoaderService } from './config-loader.service';
 import { environment } from '../environments/environment';
 import { BrowserModule, DomSanitizer } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -23,7 +25,7 @@ import {
   TranslationModule,
 } from 'angular-l10n';
 import { OverlayContainer } from '@angular/cdk/overlay';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
@@ -45,7 +47,7 @@ const l10nConfig: L10nConfig = {
   },
   translation: {
     providers: [
-      { type: ProviderType.WebAPI, prefix: 'https://aloketewary.github.io/Material-Color-Tool/i18n/locale-' },
+      { type: ProviderType.WebAPI, prefix: 'https://raw.githubusercontent.com/aloketewary/Material-Color-Tool/master/docs/i18n/locale-' },
       { type: ProviderType.Fallback, prefix: './assets/i18n/locale-' }
     ],
     caching: true,
@@ -53,6 +55,10 @@ const l10nConfig: L10nConfig = {
     composedKeySeparator: '.'
   }
 };
+
+export function configProviderFactory(provider: ConfigLoaderService) {
+  return () => provider.load();
+}
 
 @NgModule({
   declarations: [
@@ -81,7 +87,10 @@ const l10nConfig: L10nConfig = {
     MatDividerModule,
     ScrollEventModule
   ],
-  providers: [],
+  providers: [
+    { provide: APP_INITIALIZER, useFactory: configProviderFactory, deps: [ConfigLoaderService], multi: true },
+    // { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

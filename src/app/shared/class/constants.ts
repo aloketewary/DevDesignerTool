@@ -1,5 +1,4 @@
+// tslint:disable:max-line-length
 export class Constants {
-    public static readonly MAIN_TABS = 'main_tabs';
-    public static readonly LOCALE = 'locale-';
-    public static readonly ICONS_COLLECTION = 'icons';
+    public static APP_CONFIG_LOCATION = 'https://raw.githubusercontent.com/aloketewary/Material-Color-Tool/master/docs/config/app_config.json';
 }
