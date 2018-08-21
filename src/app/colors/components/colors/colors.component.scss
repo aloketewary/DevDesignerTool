@@ -1,0 +1,48 @@
+.inner-content {
+    overflow: auto;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 112px;
+    background-color: lightgray;
+}
+
+.card {
+    /* Add shadows to create the "card" effect */
+    transition: 0.3s;
+    // border-radius: 5px; /* 5px rounded corners */
+    height: 50px;
+    width: 50px;
+    cursor: pointer;
+}
+
+.round {
+    border-radius: 50%;
+}
+
+/* Add some padding inside the card container */
+
+.container {
+    padding: 2px 16px;
+}
+
+// .flex-full {
+//     width: 100%;
+// }
+
+.width-auto {
+    margin: 0 auto;
+}
+
+@function set-notification-text-color($color) {
+    @if (lightness($color) > 50) {
+      @return #000000; // Lighter backgorund, return dark color
+    } @else {
+      @return #ffffff; // Darker background, return light color
+    }
+  }
+
+  .example-card {
+    max-width: 400px;
+  }

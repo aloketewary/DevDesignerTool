@@ -1,3 +1,5 @@
+import { HeaderComponent } from './shared/components/header/header.component';
+import { SharedModule } from './shared/modules/shared/shared.module';
 import { ConfigLoaderService } from './config-loader.service';
 import { environment } from '../environments/environment';
 import { BrowserModule, DomSanitizer } from '@angular/platform-browser';
@@ -5,7 +7,6 @@ import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HeaderComponent } from './shared/header/header.component';
 import {
   MatToolbarModule,
   MatButtonModule,
@@ -32,9 +33,9 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { IconsComponent } from './components/icons/icons.component';
 import { ScrollableDirective } from './directives/scrollable.directive';
 import { FontsComponent } from './components/fonts/fonts.component';
-import { ColorsComponent } from './components/colors/colors.component';
 import { PalletesComponent } from './components/palletes/palletes.component';
 import { IconBottomSheetComponent } from './components/icon-bottom-sheet/icon-bottom-sheet.component';
+import { ColorModule } from 'src/app/colors/color.module';
 const l10nConfig: L10nConfig = {
   locale: {
     languages: [
@@ -65,7 +66,6 @@ export function configProviderFactory(provider: ConfigLoaderService) {
     IconsComponent,
     ScrollableDirective,
     FontsComponent,
-    ColorsComponent,
     PalletesComponent,
     IconBottomSheetComponent
   ],
@@ -74,18 +74,9 @@ export function configProviderFactory(provider: ConfigLoaderService) {
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
-    MatToolbarModule,
-    MatButtonModule,
+    SharedModule,
     TranslationModule.forRoot(l10nConfig),
-    MatTabsModule,
-    MatIconModule,
-    MatCardModule,
-    FlexLayoutModule,
-    MatDividerModule,
-    MatTooltipModule,
-    MatBottomSheetModule,
-    MatListModule,
-    MatSnackBarModule,
+    ColorModule
   ],
   entryComponents: [IconBottomSheetComponent],
   providers: [
