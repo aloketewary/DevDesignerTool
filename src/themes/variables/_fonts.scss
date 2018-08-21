@@ -1,5 +1,5 @@
 .f {
-    & .family {
+    &.family {
         &-lato {
             font-family: 'Lato', sans-serif !important;
         }
@@ -7,7 +7,7 @@
             font-family: 'Roboto', sans-serif !important;
         }
     }
-    & .style {
+    &.style {
         &-normal {
             font-style: normal !important;
         }
@@ -16,12 +16,12 @@
         }
     }
     @each $var in (100, 200, 300, 400, 500, 600, 700, 800, 900, bold, bolder, lighter, normal) {
-        & .weight-#{$var} {
+        &.weight-#{$var} {
             font-weight: $var !important;
         }
     }
     @for $i from 1 to 100 {
-        & .size-#{$i} {
+        &.size-#{$i} {
             font-size: $i * 1px !important;
         }
     }

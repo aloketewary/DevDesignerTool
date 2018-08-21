@@ -1,12 +1,12 @@
+import { UiService } from './../../services/ui.service';
+import { StateManager } from './../../class/state-manager';
+import { Config } from './../../../models/config';
+import { MainTabs } from './../../model/main-tabs';
 import { trigger, transition, style, animate } from '@angular/animations';
-import { UiService } from './../services/ui.service';
-import { ConfigLoaderService } from './../../config-loader.service';
-import { Config } from './../../models/config';
-import { StateManager } from './../class/state-manager';
-import { MainTabs } from '../model/main-tabs';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Language } from 'angular-l10n';
 import { Router, NavigationEnd } from '@angular/router';
+import { ConfigLoaderService } from 'src/app/config-loader.service';
 
 @Component({
   selector: 'app-header',

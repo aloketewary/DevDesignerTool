@@ -1,0 +1,42 @@
+<div class="inner-content">
+  <!-- <div fxLayout="row" fxLayoutAlign="start center" class="flex-full"> -->
+  <div fxLayout="column" fxLayoutAlign="center start" class="flex-full margin-10-t margin-10-lr">
+    <div fxLayout="column" fxLayoutAlign="center start" fxLayoutWrap class="flex-full" *ngFor="let matCol of materialColors; let i=index">
+      <div fxLayout="row" fxLayoutAlign="start center" class="flex-full">
+        <span class="f size-25 family-lato weight-300 padding-10">{{matCol.color | uppercase}}</span>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <div [ngClass]="{'card margin-1 mat-elevation-z2': true, 'round': col == clickedPrimary}" [style.background-color]="col.hex"
+          *ngFor="let col of matCol.variations;" (mouseenter)="matElevationAdd($event)" (mouseleave)="matElevationRemove($event)"
+          (click)="cardClicked(col)">
+          <div class="container">
+            <div fxLayout="row" fxLayoutAlign="center center" class="flex-full">
+              <ng-container *ngIf="col == clickedPrimary; then thenTemplate; else elseTemplate"></ng-container>
+              <ng-template #thenTemplate>
+                <span class="margin-8-t f size-25 family-lato weight-700 col-white" [style.color]="col.color">P</span>
+              </ng-template>
+              <ng-template #elseTemplate>
+                <span class="margin-13-t f size-16 family-lato weight-300" [style.color]="col.color">{{col.weight}}</span>
+              </ng-template>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="end center" class="flex-full">
+    <mat-card class="example-card" [style.background-color]="clickedPrimary?.hex">
+      <mat-card-header>
+        <mat-card-title>{{clickedPrimary?.color}}</mat-card-title>
+
+      </mat-card-header>
+
+      <mat-card-content>
+        <p>
+
+        </p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <!-- </div> -->
+</div>

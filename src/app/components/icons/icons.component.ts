@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 import { trigger, transition, style, animate, stagger, query } from '@angular/animations';
 import { MatBottomSheet, MatBottomSheetRef } from '@angular/material';
 import { ObservableMedia } from '@angular/flex-layout';
+import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
 
 @Component({
   selector: 'app-icons',
@@ -39,7 +40,7 @@ import { ObservableMedia } from '@angular/flex-layout';
     )
   ]
 })
-export class IconsComponent implements OnInit, OnDes {
+export class IconsComponent implements OnInit, OnDestroy {
 
   selectedIcon: IconsProperty;
   @Language() lang: string;
@@ -66,8 +67,13 @@ export class IconsComponent implements OnInit, OnDes {
     });
   }
 
+  ngOnDestroy() {
+    this.selectedIcon = new IconsProperty();
+    this.icons = new Array<IconData>();
+  }
+
   selectIcon(ico) {
-    this.selectedIcon = this.selectedIcon != ico ? ico : new IconsProperty();
+    this.selectedIcon = this.selectedIcon !== ico ? ico : new IconsProperty();
     if (this.observableMedia.isActive('xs') || this.observableMedia.isActive('sm')) {
       this.isSmallDevice = true;
       this.openBottomSheet();

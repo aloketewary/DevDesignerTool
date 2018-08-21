@@ -1,12 +1,12 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 
 @Component({
-  selector: 'app-colors',
-  templateUrl: './colors.component.html',
-  styleUrls: ['./colors.component.scss'],
+  selector: 'app-loader',
+  templateUrl: './loader.component.html',
+  styleUrls: ['./loader.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class ColorsComponent implements OnInit {
+export class LoaderComponent implements OnInit {
 
   constructor() { }
 

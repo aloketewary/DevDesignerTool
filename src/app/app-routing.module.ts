@@ -1,4 +1,4 @@
-import { ColorsComponent } from './components/colors/colors.component';
+import { ColorModule } from './colors/color.module';
 import { PalletesComponent } from './components/palletes/palletes.component';
 import { FontsComponent } from './components/fonts/fonts.component';
 import { IconsComponent } from './components/icons/icons.component';
@@ -10,7 +10,7 @@ const routes: Routes = [
   { path: 'icons', component: IconsComponent },
   { path: 'fonts', component: FontsComponent },
   { path: 'palletes', component: PalletesComponent },
-  { path: 'colors', component: ColorsComponent }
+  { path: 'colors', loadChildren: () => ColorModule }
 ];
 
 @NgModule({

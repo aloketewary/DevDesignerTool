@@ -127,12 +127,7 @@
   "defaultProject": "MaterialColorTool",
   "schematics": {
     "@schematics/angular:component": {
-      "styleext": "scss",
-      "changeDetection": "Default",
-      "viewEncapsulation": "None"
-    },
-    "@schematics/angular:service": {
-      "spec": true
+      "styleext": "scss"
     }
   }
 }
