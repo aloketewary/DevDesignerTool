@@ -21,24 +21,24 @@ $listProperty: margin padding;
 			$varItem: nth($listVariable, $thisItem);
 			#{$property}: $varItem;
 			&-t {
-				#{$property}-top: $varItem;
+				#{$property}-top: $varItem !important;
 			}
 			&-r {
-				#{$property}-right: $varItem;
+				#{$property}-right: $varItem !important;
 			}
 			&-b {
-				#{$property}-bottom: $varItem;
+				#{$property}-bottom: $varItem !important;
 			}
 			&-l {
-				#{$property}-left: $varItem;
+				#{$property}-left: $varItem !important;
 			}
 			&-tb {
-				#{$property}-top: $varItem;
-				#{$property}-bottom: $varItem;
+				#{$property}-top: $varItem !important;
+				#{$property}-bottom: $varItem !important;
 			}
 			&-lr {
-				#{$property}-left: $varItem;
-				#{$property}-right: $varItem;
+				#{$property}-left: $varItem !important;
+				#{$property}-right: $varItem !important;
 			}
 		}
 	}
@@ -48,27 +48,27 @@ $listProperty: margin padding;
 	@for $i from -100 through 100 {
 		.#{$prop} {
 			&-#{$i} {
-				#{$prop}: #{$i+"px"};
+				#{$prop}: #{$i+"px"} !important;
 			}
 			&-#{$i}-t {
-				#{$prop}-top: #{$i+"px"};
+				#{$prop}-top: #{$i+"px"} !important;
 			}
 			&-#{$i}-r {
-				#{$prop}-right: #{$i+"px"};
+				#{$prop}-right: #{$i+"px"} !important;
 			}
 			&-#{$i}-b {
-				#{$prop}-bottom: #{$i+"px"};
+				#{$prop}-bottom: #{$i+"px"} !important;
 			}
 			&-#{$i}-l {
-				#{$prop}-left: #{$i+"px"};
+				#{$prop}-left: #{$i+"px"} !important;
 			}
 			&-#{$i}-tb {
-				#{$prop}-top: #{$i+"px"};
-				#{$prop}-bottom: #{$i+"px"};
+				#{$prop}-top: #{$i+"px"} !important;
+				#{$prop}-bottom: #{$i+"px"} !important;
 			}
 			&-#{$i}-lr {
-				#{$prop}-left: #{$i+"px"};
-				#{$prop}-right: #{$i+"px"};
+				#{$prop}-left: #{$i+"px"} !important;
+				#{$prop}-right: #{$i+"px"} !important;
 			}
 		}
 	}

@@ -1,38 +1,44 @@
 <div class="inner-content">
-  <div [ngClass]="{'p-b-1em':true}" fxFlex="80%" fxFlex.lt-md="80%" fxFlex.xs="90%">
-    <ng-container *ngIf="(page.data | async) === null; then thenTemplate; else elseTemplate"></ng-container>
+  <div [ngClass]="{'p-b-1em margin-10-lr':true}" fxFlex>
+    <ng-container *ngIf="isLoading; then thenTemplate; else elseTemplate"></ng-container>
     <ng-template #thenTemplate>
       Loading Icons...
     </ng-template>
     <ng-template #elseTemplate>
-        <mat-card class="mat-elevation-z6 flex-full" detect-scroll (onScroll)="handleScroll($event)">
+      <div fxLayout="row" class="flex-full margin-10-t margin-10-l" *ngIf="selectedIcon?.name && !isSmallDevice" fxFlex="50" fxFlex.gt-sm="30" [@enterAnimation]>
+        <div fxLayout="row" fxLayoutAlign="start" class="flex-full">
+          <mat-card class="details-card" fxFlex="100">
+            <mat-toolbar color="primary">
+              <span class="f family-lato size-22 weight-400">{{selectedIcon?.name | uppercase}}</span>
+            </mat-toolbar>
+            <button mat-mini-fab color="accent" (click)="openBottomSheet()" class="fab-icon">
+              <mat-icon>content_copy</mat-icon>
+            </button>
             <mat-card-content>
-              <div *ngFor="let icon of page.data | async;">
-                <div fxLayout="row" fxLayoutAlign="center" class="flex-full">
-                  <span class="f-size-25 roboto f-weight-300 padding-10">{{icon.name | uppercase}}</span>
-                </div>
-                <mat-divider></mat-divider>
-                <div fxLayout="column" fxLayoutAlign="center" class="icon-card-div" fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="start center"
-                  fxLayoutWrap>
-                  <mat-card fxFlex.gt-sm="46%" fxFlex.gt-md="23%" fxFlex="80%" [ngClass]="{'icon-card': true, 'bg-blue-grey': getIconSelection(ico?.ligature)}" *ngFor="let ico of icon.icons; let i=index"
-                    (mouseenter)="matElevationAdd($event)" (mouseleave)="matElevationRemove($event)" (click)="selectIcon(ico)">
-                    <mat-card-content>
-                      <div fxLayout="row" fxLayoutAlign="center center" class="flex-full padding-10">
-                        <button mat-fab [color]="getColorsByIconSelection(ico?.ligature)">
-                          <mat-icon class="custom-icon md-36">{{ico.ligature}}</mat-icon>
-                        </button>
-                      </div>
-                      <mat-divider [inset]="true">
-                      </mat-divider>
-                      <div fxLayout="row" fxLayoutAlign="center center" class="flex-full padding-5">
-                          <span [ngClass]="{'icon-card f-size-14 lato f-weight-300': true, 'col-white': getIconSelection(ico?.ligature)}">{{ico.name | uppercase}}</span>
-                      </div>
-                    </mat-card-content>
-                  </mat-card>
-                </div>
-              </div>
+              Working in progress......
             </mat-card-content>
+            <!-- <mat-card-actions>
+              <button mat-button>Ok</button>#1487
+            </mat-card-actions> -->
           </mat-card>
+        </div>
+      </div>
+      <div fxLayout="row" class="flex-full under-div margin-15-l" fxFlex>
+        <div fxLayout="column" fxLayoutAlign="center start" *ngFor="let icon of icons;" class="flex-full" style="margin: 0 15;">
+          <span class="f family-lato weight-500 size-30 flex-full margin-30-tb" fxLayout="row" fxLayoutAlign="center" fxFlex>{{icon.name
+            | uppercase}}</span>
+          <mat-divider></mat-divider>
+          <div fxLayout="row" class="under-div">
+              <div [ngClass]="{'icon-pack__icon margin-5': true, 'bg-accent': ico == selectedIcon }" [matTooltip]="ico.ligature" matTooltipPosition="above" *ngFor="let ico of icon?.icons; let i=index" (click)="selectIcon(ico)">
+                  <i class="material-icons">{{ico.ligature}}</i>
+                </div>
+            <!-- <button [matTooltip]="ico.ligature" matTooltipPosition="above" mat-fab *ngFor="let ico of icon?.icons; let i=index" [color]="getColorsByIconSelection(ico?.ligature)" (click)="selectIcon(ico)"
+              class="margin-10 icon-btn">
+              <mat-icon class="f size-36">{{ico.ligature}}</mat-icon>
+            </button> -->
+          </div>
+        </div>
+      </div>
     </ng-template>
   </div>
 </div>

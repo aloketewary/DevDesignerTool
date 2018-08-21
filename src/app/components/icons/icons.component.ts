@@ -1,11 +1,13 @@
+import { IconBottomSheetComponent } from './../icon-bottom-sheet/icon-bottom-sheet.component';
+import { IconData, IconsProperty } from './../../models/icon-data';
+import { UiService } from './../../shared/services/ui.service';
 import { ConfigLoaderService } from './../../config-loader.service';
 import { Config } from './../../models/config';
-import { PaginationService } from '../../services/pagination.service';
-import { Constants } from '../../shared/class/constants';
 import { Language } from 'angular-l10n';
-import { Component, OnInit, Renderer2 } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { trigger, transition, style, animate, stagger, query } from '@angular/animations';
-import { ScrollEvent } from 'ngx-scroll-event';
+import { MatBottomSheet, MatBottomSheetRef } from '@angular/material';
+import { ObservableMedia } from '@angular/flex-layout';
 
 @Component({
   selector: 'app-icons',
@@ -22,38 +24,54 @@ import { ScrollEvent } from 'ngx-scroll-event';
           ])
         ], { optional: true })
       ])
-    ])
+    ]),
+    trigger(
+      'enterAnimation', [
+        transition(':enter', [
+          style({transform: 'translateX(100%)', opacity: 0}),
+          animate('500ms', style({transform: 'translateX(0)', opacity: 1}))
+        ]),
+        transition(':leave', [
+          style({transform: 'translateX(0)', opacity: 1}),
+          animate('500ms', style({transform: 'translateX(100%)', opacity: 0}))
+        ])
+      ]
+    )
   ]
 })
-export class IconsComponent implements OnInit {
+export class IconsComponent implements OnInit, OnDes {
 
-  selectedIcon: any;
+  selectedIcon: IconsProperty;
   @Language() lang: string;
   private config: Config;
+  icons: Array<IconData>;
+  isLoading: boolean;
+  isSmallDevice: boolean;
   constructor(
-    private renderer2: Renderer2,
-    public page: PaginationService,
-    configLoader: ConfigLoaderService
+    configLoader: ConfigLoaderService,
+    private uiService: UiService,
+    private bottomSheet: MatBottomSheet,
+    private observableMedia: ObservableMedia,
   ) {
+    this.isLoading = true;
     this.config = configLoader.getConfigData();
-    this.selectedIcon = { ligature: '' };
+    this.selectedIcon = new IconsProperty();
+    this.icons = new Array<IconData>();
   }
 
   ngOnInit() {
-    this.page.init(this.config['ICONS_COLLECTION'], 'key', { limit: 1, reverse: false, prepend: false });
-  }
-
-  // For Material Card shadow handle not own specific css trick
-  matElevationAdd(ev: Event) {
-    this.renderer2.addClass(ev.target, 'mat-elevation-z8');
-  }
-
-  matElevationRemove(ev: Event) {
-    this.renderer2.removeClass(ev.target, 'mat-elevation-z8');
+    this.uiService.getIconsData().subscribe((_icons) => {
+      this.icons = _icons;
+      this.isLoading = false;
+    });
   }
 
   selectIcon(ico) {
-    this.selectedIcon = ico;
+    this.selectedIcon = this.selectedIcon != ico ? ico : new IconsProperty();
+    if (this.observableMedia.isActive('xs') || this.observableMedia.isActive('sm')) {
+      this.isSmallDevice = true;
+      this.openBottomSheet();
+    }
   }
 
   getColorsByIconSelection(ico): string {
@@ -64,17 +82,8 @@ export class IconsComponent implements OnInit {
     return this.selectedIcon.ligature === ligature;
   }
 
-  public handleScroll(event: ScrollEvent) {
-    console.log('scroll occurred', event.originalEvent);
-    if (event.isReachingBottom) {
-     this.page.more();
-    }
-    if (event.isReachingTop) {
-      console.log(`the user is reaching the bottom`);
-    }
-    if (event.isWindowEvent) {
-      console.log(`This event is fired on Window not on an element.`);
-    }
-
+  openBottomSheet(): void {
+    this.bottomSheet.open(IconBottomSheetComponent, {data: this.selectedIcon});
   }
+
 }

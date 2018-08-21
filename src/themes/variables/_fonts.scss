@@ -1,28 +1,28 @@
 .f {
-    &-family {
-        &.lato {
-            font-family: 'Lato', sans-serif;
+    & .family {
+        &-lato {
+            font-family: 'Lato', sans-serif !important;
         }
-        &.roboto {
-            font-family: 'Roboto', sans-serif;
+        &-roboto {
+            font-family: 'Roboto', sans-serif !important;
         }
     }
-    &-style {
+    & .style {
         &-normal {
-            font-style: normal;
+            font-style: normal !important;
         }
         &-italic {
-            font-style: italic;
+            font-style: italic !important;
         }
     }
     @each $var in (100, 200, 300, 400, 500, 600, 700, 800, 900, bold, bolder, lighter, normal) {
-        &-weight-#{$var} {
-            font-weight: $var;
+        & .weight-#{$var} {
+            font-weight: $var !important;
         }
     }
     @for $i from 1 to 100 {
-        &-size-#{$i} {
-            font-size: $i * 1px;
+        & .size-#{$i} {
+            font-size: $i * 1px !important;
         }
     }
 }

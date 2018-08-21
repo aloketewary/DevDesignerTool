@@ -1,0 +1,42 @@
+<mat-nav-list>
+  <h3 mat-subheader>Icons and Usage</h3>
+  <mat-list-item>
+    <mat-icon color="primary" mat-list-icon>{{data.ligature}}</mat-icon>
+    <h4 mat-line>{{copyMatForModernBrowser}}</h4>
+    <p mat-line> For modern browsers </p>
+    <button mat-icon-button (click)="copyMessage(copyMatForModernBrowser)">
+      <mat-icon>content_copy</mat-icon>
+    </button>
+  </mat-list-item>
+  <mat-list-item>
+    <mat-icon color="primary" mat-list-icon>{{data.ligature}}</mat-icon>
+    <h4 mat-line>{{copyMatForModernBrowser}}</h4>
+    <p mat-line> For older browsers </p>
+    <button mat-icon-button (click)="copyMessage(copyMatForModernBrowser)">
+      <mat-icon>content_copy</mat-icon>
+    </button>
+  </mat-list-item>
+  <mat-list-item>
+    <mat-icon color="primary" mat-list-icon>{{data.ligature}}</mat-icon>
+    <h4 mat-line><strong>{{data.ligature}}</strong></h4>
+    <p mat-line> Only Icon name </p>
+    <button mat-icon-button (click)="copyMessage(data.ligature)">
+      <mat-icon>content_copy</mat-icon>
+    </button>
+  </mat-list-item>
+  <mat-divider></mat-divider>
+  <h3 mat-subheader>Assets</h3>
+  <mat-list-item>
+    <mat-icon mat-list-icon>note</mat-icon>
+    <h4 mat-line>Download .svg file</h4>
+    <p mat-line>svg are best for responsiveness</p>
+    <button mat-icon-button (click)="downloadFile(data.ligature)">
+        <mat-icon>file_download</mat-icon>
+    </button>
+  </mat-list-item>
+  <mat-list-item>
+    <mat-icon mat-list-icon>note</mat-icon>
+    <h4 mat-line>ggfh</h4>
+    <p mat-line> fhfghgf </p>
+  </mat-list-item>
+</mat-nav-list>
