@@ -10,6 +10,7 @@ import { trigger, transition, style, animate, stagger, query } from '@angular/an
 import { MatBottomSheet } from '@angular/material';
 import { ObservableMedia } from '@angular/flex-layout';
 import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
+import { isNullOrUndefined } from 'util';
 
 @Component({
   selector: 'app-icons',
@@ -78,15 +79,31 @@ export class IconComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.getIconsData();
     this.uiService.getIconsList().subscribe((_list) => {
       this.iconsList = _list;
       this.isLoading = false;
+      this.selectedIconList = isNullOrUndefined(_list) ? new IconsList() : _list[0];
+      this.getIconsData();
     });
   }
 
   getIconsData() {
-    this.uiService.getIconsData().subscribe((_icons) => {
+    let selectedUrl: string;
+    switch (this.selectedIconList.for) {
+      case this.config['ICONS_NAME_MATERIAL']:
+        selectedUrl = this.config['ICONS_DATA_URL'];
+        break;
+      case this.config['ICONS_NAME_MDI']:
+        selectedUrl = this.config['ICONS_DATA_URL'];
+        break;
+      case this.config['ICONS_NAME_FA']:
+        selectedUrl = this.config['ICONS_DATA_URL'];
+        break;
+      default:
+        selectedUrl = this.config['ICONS_DATA_URL'];
+        break;
+    }
+    this.uiService.getIconsData(selectedUrl).subscribe((_icons) => {
       this.icons = _icons;
       this.iconsLoading = false;
     });
@@ -106,7 +123,9 @@ export class IconComponent implements OnInit, OnDestroy {
   }
 
   selectedList(iconList) {
+    this.iconsLoading = true;
     this.selectedIconList = iconList;
+    this.getIconsData();
   }
 
   getColorsByIconSelection(ico): string {

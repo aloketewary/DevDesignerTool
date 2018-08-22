@@ -1,6 +1,9 @@
 <mat-toolbar color="primary">
-  <span class="f family-lato size-25">{{'APP.NAME' | translate:lang}}</span>
-  <span class="f family-lato margin-7-l size-25">{{'APP.SUBNAME' | translate:lang}}</span>
+  <div fxLayout="column" fxLayoutAlign="center start">
+    <span class="f family-lato size-30 margin-15-t">{{'APP.NAME' | translate:lang}}</span>
+    <span class="f family-lato size-12 margin--6-t margin-5-l">{{'APP.SUBNAME.1' | translate:lang}} <span class="col-red">{{'APP.SUBNAME.HEART'
+        | translate:lang}}</span> {{'APP.SUBNAME.2' | translate:lang}}</span>
+  </div>
   <!-- This fills the remaining space of the current row -->
   <span class="fill-remaining-space"></span>
   <!-- <span>Right Aligned Text</span> -->
@@ -9,9 +12,8 @@
   Loading tabs...
 </ng-container> -->
 
-<nav mat-tab-nav-bar  mat-stretch-tabs [color]="'primary'" [backgroundColor]="'accent'">
-  <a mat-tab-link  *ngFor="let tab of asyncTabs" 
-  (click)="gotoRoute(tab)" [active]="state.activeTab == tab">
-  {{tab?.label | translate:lang}}
+<nav mat-tab-nav-bar mat-stretch-tabs [color]="'primary'" [backgroundColor]="'accent'">
+  <a mat-tab-link *ngFor="let tab of asyncTabs" (click)="gotoRoute(tab)" [active]="state.activeTab == tab">
+    {{tab?.label | translate:lang}}
   </a>
 </nav>

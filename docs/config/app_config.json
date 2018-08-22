@@ -7,5 +7,8 @@
     "MAIN_TABS_URL" : "https://raw.githubusercontent.com/aloketewary/Material-Color-Tool/master/docs/config/main_tabs.json",
     "ICONS_DATA_URL" : "https://raw.githubusercontent.com/aloketewary/Material-Color-Tool/master/docs/config/icon_data.json",
     "COLORS_DATA_URL" : "https://raw.githubusercontent.com/aloketewary/Material-Color-Tool/master/docs/config/color_data.json",
-    "ICONS_LIST_URL": "https://raw.githubusercontent.com/aloketewary/Material-Color-Tool/master/docs/config/icons_list.json"
+    "ICONS_LIST_URL": "https://raw.githubusercontent.com/aloketewary/Material-Color-Tool/master/docs/config/icons_list.json",
+    "ICONS_NAME_MATERIAL": "material",
+    "ICONS_NAME_MDI": "mdi",
+    "ICONS_NAME_FA": "fa"
 }

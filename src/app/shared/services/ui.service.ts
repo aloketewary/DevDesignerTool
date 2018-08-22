@@ -22,8 +22,8 @@ export class UiService {
     this.darkModeState = new BehaviorSubject<boolean>(false);
   }
 
-  public getIconsData(): Observable<IconData[]> {
-    return this.http.get<IconData[]>(this.config['ICONS_DATA_URL'])
+  public getIconsData(url: string): Observable<IconData[]> {
+    return this.http.get<IconData[]>(url)
       .pipe(
         retry(3), // retry a failed request up to 3 times
         map((icon: any) => icon.categories),
