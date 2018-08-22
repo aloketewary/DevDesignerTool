@@ -15,6 +15,8 @@ export class IconsProperty {
 
 export class IconsList {
     name: string;
+    desc: string;
     author: string;
     icon: string;
+    for: string;
 }

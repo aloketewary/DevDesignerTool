@@ -54,13 +54,14 @@ import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
 export class IconComponent implements OnInit, OnDestroy {
 
   selectedIcon: IconsProperty;
-  selectedtIconList: IconsList;
+  selectedIconList: IconsList;
   @Language() lang: string;
   private config: Config;
   icons: Array<IconData>;
   isLoading: boolean;
   isSmallDevice: boolean;
   iconsList: Array<IconsList>;
+  iconsLoading: boolean;
   constructor(
     configLoader: ConfigLoaderService,
     private uiService: UiService,
@@ -68,20 +69,26 @@ export class IconComponent implements OnInit, OnDestroy {
     private observableMedia: ObservableMedia,
   ) {
     this.isLoading = true;
+    this.iconsLoading = true;
     this.config = configLoader.getConfigData();
     this.selectedIcon = new IconsProperty();
-    this.selectedtIconList = new IconsList();
+    this.selectedIconList = new IconsList();
     this.icons = new Array<IconData>();
     this.iconsList = new Array<IconsList>();
   }
 
   ngOnInit() {
-    this.uiService.getIconsData().subscribe((_icons) => {
-      this.icons = _icons;
-      this.isLoading = false;
-    });
+    this.getIconsData();
     this.uiService.getIconsList().subscribe((_list) => {
       this.iconsList = _list;
+      this.isLoading = false;
+    });
+  }
+
+  getIconsData() {
+    this.uiService.getIconsData().subscribe((_icons) => {
+      this.icons = _icons;
+      this.iconsLoading = false;
     });
   }
 
@@ -98,8 +105,8 @@ export class IconComponent implements OnInit, OnDestroy {
     }
   }
 
-  selectedIconList(iconList) {
-    this.selectedIcon = iconList;
+  selectedList(iconList) {
+    this.selectedIconList = iconList;
   }
 
   getColorsByIconSelection(ico): string {

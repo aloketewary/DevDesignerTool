@@ -3,18 +3,21 @@
         "name": "Google Material Icons",
         "desc": "Official Google Material Design",
         "author": "Google",
-        "icon": ""
+        "icon": "",
+        "for":"material"
     },
     {
         "name": "Material Design Icons",
         "desc": "Community Based Material Design",
         "author": "Austin Andrews",
-        "icon": ""
+        "icon": "",
+        "for": "mdi"
     },
     {
         "name": "Font Awesome Icons",
         "desc": "Font Awesome 4.7.0 ·",
         "author": "Font Awesome",
-        "icon": ""
+        "icon": "",
+        "for": "fa"
     }
 ]
