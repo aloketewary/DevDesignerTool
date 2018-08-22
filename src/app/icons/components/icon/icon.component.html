@@ -5,7 +5,26 @@
       Loading Icons...
     </ng-template>
     <ng-template #elseTemplate>
-      <div fxLayout="row" class="flex-full margin-10-t margin-10-l" *ngIf="selectedIcon?.name && !isSmallDevice" fxFlex="50" fxFlex.gt-sm="30" [@enterAnimation]>
+      <div fxLayout="row" class="flex-full margin-10-t margin-10-l" *ngIf="!selectedIcon?.name && !isSmallDevice" fxFlex="50" fxFlex.gt-sm="30"
+        [@enterAnimation]>
+        <div fxLayout="row" fxLayoutAlign="start" class="flex-full">
+          <mat-card class="details-card" fxFlex="100">
+            <mat-card-content>
+                <mat-nav-list>
+                    <mat-list-item [ngClass]="{'col-gradient': true,  'always': list != selectedtIconList, 'selected': list == selectedtIconList }" *ngFor="let list of iconsList">
+                       <h1 matLine class="f weight-500 size-20">{{list.name}}</h1>
+                       <p matLine class="f weight-300 size-14">{{list.desc}} {{'ICONS.ICONS_LIST.GROUP.BY'}} <strong>{{list.author}}</strong></p>
+                       <button mat-icon-button (click)="selectedIconList(list)">
+                          <mat-icon>keyboard_arrow_right</mat-icon>
+                       </button>
+                    </mat-list-item>
+                  </mat-nav-list>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+      <div fxLayout="row" class="flex-full margin-10-t margin-10-l" *ngIf="selectedIcon?.name && !isSmallDevice" fxFlex="50" fxFlex.gt-sm="30"
+        [@enterAnimation]>
         <div fxLayout="row" fxLayoutAlign="start" class="flex-full">
           <mat-card class="details-card" fxFlex="100">
             <mat-toolbar color="primary">
@@ -29,9 +48,10 @@
             | uppercase}}</span>
           <mat-divider></mat-divider>
           <div fxLayout="row" class="under-div">
-              <div [ngClass]="{'icon-pack__icon margin-5': true, 'bg-accent': ico == selectedIcon }" [matTooltip]="ico.ligature" matTooltipPosition="above" *ngFor="let ico of icon?.icons; let i=index" (click)="selectIcon(ico)">
-                  <i class="material-icons">{{ico.ligature}}</i>
-                </div>
+            <div [ngClass]="{'icon-pack__icon margin-5': true, 'bg-accent': ico == selectedIcon }" [matTooltip]="ico.ligature" matTooltipPosition="above"
+              *ngFor="let ico of icon?.icons; let i=index" (click)="selectIcon(ico)" [@listAnimation]="icon?.icons?.length">
+              <i class="material-icons">{{ico.ligature}}</i>
+            </div>
             <!-- <button [matTooltip]="ico.ligature" matTooltipPosition="above" mat-fab *ngFor="let ico of icon?.icons; let i=index" [color]="getColorsByIconSelection(ico?.ligature)" (click)="selectIcon(ico)"
               class="margin-10 icon-btn">
               <mat-icon class="f size-36">{{ico.ligature}}</mat-icon>

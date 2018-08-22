@@ -1,24 +1,13 @@
 import { HeaderComponent } from './shared/components/header/header.component';
 import { SharedModule } from './shared/modules/shared/shared.module';
 import { ConfigLoaderService } from './config-loader.service';
-import { environment } from '../environments/environment';
 import { BrowserModule, DomSanitizer } from '@angular/platform-browser';
 import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
-  MatToolbarModule,
-  MatButtonModule,
   MatIconRegistry,
-  MatTabsModule,
-  MatIconModule,
-  MatCardModule,
-  MatDividerModule,
-  MatTooltipModule,
-  MatBottomSheetModule,
-  MatListModule,
-  MatSnackBarModule
 } from '@angular/material';
 import {
   L10nConfig,
@@ -29,13 +18,9 @@ import {
 } from 'angular-l10n';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { HttpClientModule } from '@angular/common/http';
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { IconsComponent } from './components/icons/icons.component';
 import { ScrollableDirective } from './directives/scrollable.directive';
 import { FontsComponent } from './components/fonts/fonts.component';
 import { PalletesComponent } from './components/palletes/palletes.component';
-import { IconBottomSheetComponent } from './components/icon-bottom-sheet/icon-bottom-sheet.component';
-import { ColorModule } from 'src/app/colors/color.module';
 const l10nConfig: L10nConfig = {
   locale: {
     languages: [
@@ -63,22 +48,18 @@ export function configProviderFactory(provider: ConfigLoaderService) {
   declarations: [
     AppComponent,
     HeaderComponent,
-    IconsComponent,
     ScrollableDirective,
     FontsComponent,
     PalletesComponent,
-    IconBottomSheetComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    AppRoutingModule,
     SharedModule,
     TranslationModule.forRoot(l10nConfig),
-    ColorModule
+    AppRoutingModule,
   ],
-  entryComponents: [IconBottomSheetComponent],
   providers: [
     { provide: APP_INITIALIZER, useFactory: configProviderFactory, deps: [ConfigLoaderService], multi: true },
     // { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }

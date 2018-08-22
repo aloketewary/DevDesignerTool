@@ -1,5 +1,5 @@
-import { UiService } from './../../shared/services/ui.service';
-import { IconsProperty } from './../../models/icon-data';
+import { IconsProperty } from '../../models/icon-data';
+import { UiService } from './../../../shared/services/ui.service';
 import { MatBottomSheetRef, MAT_BOTTOM_SHEET_DATA, MatSnackBar } from '@angular/material';
 import { Component, OnInit, ViewEncapsulation, Inject } from '@angular/core';
 import { saveAs } from 'file-saver';

@@ -11,5 +11,12 @@
             "PALLETE": "Pallete",
             "TEMPLATES": "Templates"
         }
+    },
+    "ICONS": {
+        "ICONS_LIST": {
+            "GROUP": {
+                "BY" : "by"
+            }
+        }
     }
 }

@@ -1,9 +1,8 @@
-import { IconData } from './../../models/icon-data';
+import { IconsList } from './../../icons/models/icon-data';
+import { IconData } from '../../icons/models/icon-data';
 import { ConfigLoaderService } from './../../config-loader.service';
 import { Config } from './../../models/config';
-import { Constants } from './../class/constants';
-import { AbstractHttpService } from './../../services/abstract-http.service';
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { retry, catchError, map } from 'rxjs/operators';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
@@ -24,9 +23,7 @@ export class UiService {
   }
 
   public getIconsData(): Observable<IconData[]> {
-    // tslint:disable-next-line:max-line-length
-    const url = 'https://gist.githubusercontent.com/aloketewary/7b696088f1f979cc904632bc9048eab9/raw/c27590c91ad5494ca3e8861c02eedcd537e4e1ff/material-icons-list-json.json';
-    return this.http.get<IconData[]>(this.config['ICONS_DATA_URL'] || url)
+    return this.http.get<IconData[]>(this.config['ICONS_DATA_URL'])
       .pipe(
         retry(3), // retry a failed request up to 3 times
         map((icon: any) => icon.categories),
@@ -38,6 +35,15 @@ export class UiService {
     return this.http.get<MainTabs[]>(this.config['MAIN_TABS_URL'])
       .pipe(
         retry(3), // retry a failed request up to 3 times
+        catchError(this.handleError) // then handle the error
+      );
+  }
+
+  public getIconsList(): Observable<IconsList[]> {
+    return this.http.get<IconsList[]>(this.config['ICONS_LIST_URL'])
+      .pipe(
+        retry(3), // retry a failed request up to 3 times
+        // map((icon: any) => icon.categories),
         catchError(this.handleError) // then handle the error
       );
   }

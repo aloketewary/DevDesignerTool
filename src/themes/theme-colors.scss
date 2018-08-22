@@ -27,4 +27,27 @@
             color: #ffffff !important;
         }
     }
+
+    .col-gradient {
+        flex: 1 1 auto;
+      text-transform: uppercase;
+      transition: 0.5s;
+      background-size: 200% auto;
+     /* text-shadow: 0px 0px 10px rgba(0,0,0,0.2);*/
+      box-shadow: 0 0 20px #eee;
+      &.always {
+        color: mat-color($accent, 500);
+        background-image: linear-gradient(to right, mat-color($primary, 600)  0%, mat-color($primary, 300) 51%, mat-color($primary, 600) 100%);
+        &:hover {
+            color: mat-color($primary, 700);
+        }
+      }
+      &.selected{
+        color: mat-color($primary, 700);
+        background-image: linear-gradient(to right, mat-color($accent, 500) 0%, mat-color($accent, 300) 51%, mat-color($accent, 500) 100%);
+        &:hover {
+            color: mat-color($accent, 500);
+        }
+      }
+    }
 }

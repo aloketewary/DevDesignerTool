@@ -1,19 +1,20 @@
-import { IconBottomSheetComponent } from './../icon-bottom-sheet/icon-bottom-sheet.component';
-import { IconData, IconsProperty } from './../../models/icon-data';
-import { UiService } from './../../shared/services/ui.service';
-import { ConfigLoaderService } from './../../config-loader.service';
-import { Config } from './../../models/config';
+import { IconsList } from './../../models/icon-data';
+import { UiService } from './../../../shared/services/ui.service';
+import { ConfigLoaderService } from 'src/app/config-loader.service';
+import { Config } from './../../../models/config';
+import { IconsProperty, IconData } from '../../models/icon-data';
+import { IconBottomSheetComponent } from '../icon-bottom-sheet/icon-bottom-sheet.component';
 import { Language } from 'angular-l10n';
 import { Component, OnInit } from '@angular/core';
 import { trigger, transition, style, animate, stagger, query } from '@angular/animations';
-import { MatBottomSheet, MatBottomSheetRef } from '@angular/material';
+import { MatBottomSheet } from '@angular/material';
 import { ObservableMedia } from '@angular/flex-layout';
 import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
 
 @Component({
   selector: 'app-icons',
-  templateUrl: './icons.component.html',
-  styleUrls: ['./icons.component.scss'],
+  templateUrl: './icon.component.html',
+  styleUrls: ['./icon.component.scss'],
   animations: [
     trigger('listAnimation', [
       transition('* => *', [
@@ -21,33 +22,45 @@ import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
         query(':enter', [
           style({ opacity: 0 }),
           stagger(100, [
-            animate('0.5s', style({ opacity: 1 }))
+            animate('0.1s', style({ opacity: 1 }))
           ])
         ], { optional: true })
       ])
     ]),
     trigger(
       'enterAnimation', [
-        transition(':enter', [
-          style({transform: 'translateX(100%)', opacity: 0}),
-          animate('500ms', style({transform: 'translateX(0)', opacity: 1}))
+        transition('void => *', [
+          // 'From' styles
+          style({
+            opacity: 0.2,
+          }),
+          animate('1000ms ease-in')
         ]),
-        transition(':leave', [
-          style({transform: 'translateX(0)', opacity: 1}),
-          animate('500ms', style({transform: 'translateX(100%)', opacity: 0}))
-        ])
+
+        // :LEAVE TRANSITION
+        // 2 - Uncomment this to apply the leave transition
+        // transition('* => void', [
+        //   animate('1000ms ease-in-out',
+        //     style({
+        //       opacity: 0.2,
+        //       // transform: 'translateX(100%)'
+        //     })
+        //   )
+        // ]),
       ]
     )
   ]
 })
-export class IconsComponent implements OnInit, OnDestroy {
+export class IconComponent implements OnInit, OnDestroy {
 
   selectedIcon: IconsProperty;
+  selectedtIconList: IconsList;
   @Language() lang: string;
   private config: Config;
   icons: Array<IconData>;
   isLoading: boolean;
   isSmallDevice: boolean;
+  iconsList: Array<IconsList>;
   constructor(
     configLoader: ConfigLoaderService,
     private uiService: UiService,
@@ -57,13 +70,18 @@ export class IconsComponent implements OnInit, OnDestroy {
     this.isLoading = true;
     this.config = configLoader.getConfigData();
     this.selectedIcon = new IconsProperty();
+    this.selectedtIconList = new IconsList();
     this.icons = new Array<IconData>();
+    this.iconsList = new Array<IconsList>();
   }
 
   ngOnInit() {
     this.uiService.getIconsData().subscribe((_icons) => {
       this.icons = _icons;
       this.isLoading = false;
+    });
+    this.uiService.getIconsList().subscribe((_list) => {
+      this.iconsList = _list;
     });
   }
 
@@ -80,6 +98,10 @@ export class IconsComponent implements OnInit, OnDestroy {
     }
   }
 
+  selectedIconList(iconList) {
+    this.selectedIcon = iconList;
+  }
+
   getColorsByIconSelection(ico): string {
     return this.selectedIcon.ligature === ico ? 'accent' : 'default';
   }
@@ -89,7 +111,7 @@ export class IconsComponent implements OnInit, OnDestroy {
   }
 
   openBottomSheet(): void {
-    this.bottomSheet.open(IconBottomSheetComponent, {data: this.selectedIcon});
+    this.bottomSheet.open(IconBottomSheetComponent, { data: this.selectedIcon });
   }
 
 }
