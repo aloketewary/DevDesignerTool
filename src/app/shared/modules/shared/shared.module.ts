@@ -12,7 +12,8 @@ import {
   MatDividerModule,
   MatTooltipModule,
   MatListModule,
-  MatBottomSheetModule
+  MatBottomSheetModule,
+  MatProgressBarModule
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { TranslationModule } from 'angular-l10n';
@@ -32,6 +33,7 @@ import { TranslationModule } from 'angular-l10n';
     MatBottomSheetModule,
     MatListModule,
     MatSnackBarModule,
+    MatProgressBarModule,
     TranslationModule
   ],
   declarations: [
@@ -50,6 +52,7 @@ import { TranslationModule } from 'angular-l10n';
     MatBottomSheetModule,
     MatListModule,
     MatSnackBarModule,
+    MatProgressBarModule,
     TranslationModule
   ]
 })

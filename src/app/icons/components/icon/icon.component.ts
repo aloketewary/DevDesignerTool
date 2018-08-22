@@ -57,7 +57,7 @@ export class IconComponent implements OnInit, OnDestroy {
   selectedIcon: IconsProperty;
   selectedIconList: IconsList;
   @Language() lang: string;
-  private config: Config;
+  public config: Config;
   icons: Array<IconData>;
   isLoading: boolean;
   isSmallDevice: boolean;
@@ -97,7 +97,7 @@ export class IconComponent implements OnInit, OnDestroy {
         selectedUrl = this.config['ICONS_DATA_URL'];
         break;
       case this.config['ICONS_NAME_FA']:
-        selectedUrl = this.config['ICONS_DATA_URL'];
+        selectedUrl = this.config['FA_ICONS_DATA_URL'];
         break;
       default:
         selectedUrl = this.config['ICONS_DATA_URL'];

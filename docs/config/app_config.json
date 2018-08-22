@@ -10,5 +10,6 @@
     "ICONS_LIST_URL": "https://raw.githubusercontent.com/aloketewary/Material-Color-Tool/master/docs/config/icons_list.json",
     "ICONS_NAME_MATERIAL": "material",
     "ICONS_NAME_MDI": "mdi",
-    "ICONS_NAME_FA": "fa"
+    "ICONS_NAME_FA": "fa",
+    "FA_ICONS_DATA_URL" : "https://raw.githubusercontent.com/aloketewary/Material-Color-Tool/master/docs/config/font_awesome_icon_data.json"
 }

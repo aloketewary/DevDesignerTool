@@ -1,0 +1,71 @@
+{
+    "categories": [
+        {
+            "name": "4.7.0",
+            "key": "4.7.0",
+            "icons": [
+                {
+                    "id": "fa-500px",
+                    "name": "fa-500px",
+                    "group_id": "fa-500px",
+                    "keywords": [
+                        "action, 3d, rotation"
+                    ],
+                    "ligature": "fa-500px",
+                    "codepoint": "fa-500px"
+                },
+                {
+                    "id": "fa-address-book",
+                    "name": "fa-address-book",
+                    "group_id": "fa-address-book",
+                    "keywords": [
+                        "action, 3d, rotation"
+                    ],
+                    "ligature": "fa-address-book",
+                    "codepoint": "fa-address-book"
+                },
+                {
+                    "id": "fa-address-book-o",
+                    "name": "fa-address-book-o",
+                    "group_id": "fa-address-book-o",
+                    "keywords": [
+                        "action, 3d, rotation"
+                    ],
+                    "ligature": "fa-address-book-o",
+                    "codepoint": "fa-address-book-o"
+                },
+                {
+                    "id": "fa-address-card",
+                    "name": "fa-address-card",
+                    "group_id": "fa-address-card",
+                    "keywords": [
+                        "action, 3d, rotation"
+                    ],
+                    "ligature": "fa-address-card",
+                    "codepoint": "fa-address-card"
+                },
+                {
+                    "id": "fa-address-card-o",
+                    "name": "fa-address-card-o",
+                    "group_id": "fa-address-card-o",
+                    "keywords": [
+                        "action, 3d, rotation"
+                    ],
+                    "ligature": "fa-address-card-o",
+                    "codepoint": "fa-address-card-o"
+                },
+                {
+                    "id": "fa-adjust",
+                    "name": "fa-adjust",
+                    "group_id": "fa-adjust",
+                    "keywords": [
+                        "action, 3d, rotation"
+                    ],
+                    "ligature": "fa-adjust",
+                    "codepoint": "fa-adjust"
+                }
+                
+            ]
+        }
+    ]
+}

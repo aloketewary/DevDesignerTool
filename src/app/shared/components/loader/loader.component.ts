@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { LoaderType } from './../../model/loader-type.enum';
+import { Component, OnInit, ViewEncapsulation, Input } from '@angular/core';
 
 @Component({
   selector: 'app-loader',
@@ -8,9 +9,9 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 })
 export class LoaderComponent implements OnInit {
 
+  @Input() loaderType: LoaderType;
   constructor() { }
 
   ngOnInit() {
   }
-
 }
