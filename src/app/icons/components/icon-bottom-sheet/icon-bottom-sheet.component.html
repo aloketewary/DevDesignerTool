@@ -1,26 +1,29 @@
 <mat-nav-list>
   <h3 mat-subheader>Icons and Usage</h3>
   <mat-list-item>
-    <mat-icon color="primary" mat-list-icon>{{data.ligature}}</mat-icon>
+    <mat-icon *ngIf="data.listFor.for !== config['ICONS_NAME_FA']" color="primary" mat-list-icon>{{data.icon.ligature}}</mat-icon>
+    <span  *ngIf="data.listFor.for === config['ICONS_NAME_FA']" [innerHTML]="getFAIcon(data.icon)" mat-list-icon></span>
     <h4 mat-line>{{copyMatForModernBrowser}}</h4>
     <p mat-line> For modern browsers </p>
-    <button mat-icon-button (click)="copyMessage(copyMatForModernBrowser)">
+    <button mat-icon-button (click)="copyMessage(copyMatForModernBrowser)" matTooltip="{{'APP.COPY.TEXT' | translate:lang}}" matTooltipPosition="above">
       <mat-icon>content_copy</mat-icon>
     </button>
   </mat-list-item>
   <mat-list-item>
-    <mat-icon color="primary" mat-list-icon>{{data.ligature}}</mat-icon>
-    <h4 mat-line>{{copyMatForModernBrowser}}</h4>
+    <mat-icon *ngIf="data.listFor.for !== config['ICONS_NAME_FA']" color="primary" mat-list-icon>{{data.icon.ligature}}</mat-icon>
+    <span  *ngIf="data.listFor.for === config['ICONS_NAME_FA']" [innerHTML]="getFAIcon(data.icon)" mat-list-icon></span>
+    <h4 mat-line>{{copyMatForOlderBrowser}}</h4>
     <p mat-line> For older browsers </p>
-    <button mat-icon-button (click)="copyMessage(copyMatForModernBrowser)">
+    <button mat-icon-button (click)="copyMessage(copyMatForModernBrowser)" matTooltip="{{'APP.COPY.TEXT' | translate:lang}}" matTooltipPosition="above">
       <mat-icon>content_copy</mat-icon>
     </button>
   </mat-list-item>
   <mat-list-item>
-    <mat-icon color="primary" mat-list-icon>{{data.ligature}}</mat-icon>
-    <h4 mat-line><strong>{{data.ligature}}</strong></h4>
+    <mat-icon *ngIf="data.listFor.for !== config['ICONS_NAME_FA']" color="primary" mat-list-icon>{{data.icon.ligature}}</mat-icon>
+    <span  *ngIf="data.listFor.for === config['ICONS_NAME_FA']" [innerHTML]="getFAIcon(data.icon)" mat-list-icon></span>
+    <h4 mat-line><strong>{{data.icon.ligature}}</strong></h4>
     <p mat-line> Only Icon name </p>
-    <button mat-icon-button (click)="copyMessage(data.ligature)">
+    <button mat-icon-button (click)="copyMessage(data.icon.ligature)" matTooltip="{{'APP.COPY.TEXT' | translate:lang}}" matTooltipPosition="above">
       <mat-icon>content_copy</mat-icon>
     </button>
   </mat-list-item>
@@ -30,13 +33,8 @@
     <mat-icon mat-list-icon>note</mat-icon>
     <h4 mat-line>Download .svg file</h4>
     <p mat-line>svg are best for responsiveness</p>
-    <button mat-icon-button (click)="downloadFile(data.ligature)">
+    <button mat-icon-button (click)="downloadFile(data.icon.ligature)" matTooltip="{{'APP.DOWNLOAD.SVG' | translate:lang}}" matTooltipPosition="above">
         <mat-icon>file_download</mat-icon>
     </button>
-  </mat-list-item>
-  <mat-list-item>
-    <mat-icon mat-list-icon>note</mat-icon>
-    <h4 mat-line>ggfh</h4>
-    <p mat-line> fhfghgf </p>
   </mat-list-item>
 </mat-nav-list>

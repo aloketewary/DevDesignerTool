@@ -47,14 +47,44 @@
           <mat-progress-bar class="progress-bar margin-50-lr" color="accent" mode="query"></mat-progress-bar>
         </ng-template>
         <ng-template #elseTemplate>
-          <div fxLayout="column" fxLayoutAlign="center start" *ngFor="let cat of icons;" class="flex-full" style="margin: 0 15;">
-            <span class="f family-lato weight-500 size-22 flex-full margin-30-tb" fxLayout="row" fxLayoutAlign="center" fxFlex>{{cat.name
-              | uppercase}}</span>
-            <mat-divider></mat-divider>
-            <div fxLayout="row" class="under-div">
-              <div [ngClass]="{'icon-pack__icon margin-5': true, 'bg-accent': ico == selectedIcon }" [matTooltip]="ico.ligature" matTooltipPosition="above"
-                *ngFor="let ico of cat?.icons; let i=index" (click)="selectIcon(ico)" [@listAnimation]="cat?.icons?.length">
-                <i class="material-icons">{{ico.ligature}}</i>
+          <div *ngIf="selectedIconList.for === config['ICONS_NAME_MATERIAL']" >
+            <div fxLayout="column" fxLayoutAlign="center start" *ngFor="let cat of icons;" class="flex-full" style="margin: 0 15;">
+              <span class="f family-lato weight-500 size-22 flex-full margin-30-tb" fxLayout="row" fxLayoutAlign="center" fxFlex>{{cat.name
+                | uppercase}}</span>
+              <mat-divider></mat-divider>
+              <div fxLayout="row" class="under-div">
+                <div [ngClass]="{'icon-pack__icon margin-5': true, 'bg-accent': ico == selectedIcon }" [matTooltip]="ico.ligature" matTooltipPosition="above"
+                  *ngFor="let ico of cat?.icons; let i=index" (click)="selectIcon(ico)" [@listAnimation]="cat?.icons?.length">
+                  <i class="material-icons">{{ico.ligature}}</i>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="selectedIconList.for === config['ICONS_NAME_MDI']" >
+              <!-- <div fxLayout="column" fxLayoutAlign="center start" *ngFor="let cat of icons;" class="flex-full" style="margin: 0 15;">
+                <span class="f family-lato weight-500 size-22 flex-full margin-30-tb" fxLayout="row" fxLayoutAlign="center" fxFlex>{{cat.name
+                  | uppercase}}</span>
+                <mat-divider></mat-divider>
+                <div fxLayout="row" class="under-div">
+                  <div [ngClass]="{'icon-pack__icon margin-5': true, 'bg-accent': ico == selectedIcon }" [matTooltip]="ico.ligature" matTooltipPosition="above"
+                    *ngFor="let ico of cat?.icons; let i=index" (click)="selectIcon(ico)" [@listAnimation]="cat?.icons?.length">
+                    <i class="material-icons">{{ico.ligature}}</i>
+                  </div>
+                </div>
+              </div> -->
+              Work in Progress
+            </div>
+          <div *ngIf="selectedIconList.for === config['ICONS_NAME_FA']" >
+            <div fxLayout="column" fxLayoutAlign="center start" *ngFor="let cat of icons;" class="flex-full" style="margin: 0 15;">
+              <span class="f family-lato weight-500 size-22 flex-full margin-30-tb" fxLayout="row" fxLayoutAlign="center" fxFlex>{{cat.name
+                | uppercase}}</span>
+              <mat-divider></mat-divider>
+              <div fxLayout="row" class="under-div">
+                <div [ngClass]="{'icon-pack__icon margin-5': true, 'bg-accent': ico == selectedIcon }" [matTooltip]="ico.ligature" matTooltipPosition="above"
+                  *ngFor="let ico of cat?.icons; let i=index" (click)="selectIcon(ico)" [@listAnimation]="cat?.icons?.length">
+                  <span [innerHTML]="getFAIcon(ico)"></span>
+                  <!-- <i class="material-icons">{{ico.ligature}}</i> -->
+                </div>
               </div>
             </div>
           </div>

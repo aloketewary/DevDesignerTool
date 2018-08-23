@@ -21,6 +21,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ScrollableDirective } from './directives/scrollable.directive';
 import { FontsComponent } from './components/fonts/fonts.component';
 import { PalletesComponent } from './components/palletes/palletes.component';
+import { PageNotFoundComponent } from './shared/components/page-not-found/page-not-found.component';
 const l10nConfig: L10nConfig = {
   locale: {
     languages: [
@@ -51,6 +52,7 @@ export function configProviderFactory(provider: ConfigLoaderService) {
     ScrollableDirective,
     FontsComponent,
     PalletesComponent,
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,

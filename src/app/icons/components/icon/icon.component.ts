@@ -137,7 +137,10 @@ export class IconComponent implements OnInit, OnDestroy {
   }
 
   openBottomSheet(): void {
-    this.bottomSheet.open(IconBottomSheetComponent, { data: this.selectedIcon });
+    this.bottomSheet.open(IconBottomSheetComponent, { data: {icon: this.selectedIcon, listFor: this.selectedIconList} });
   }
 
+  getFAIcon(faObj: IconsProperty) {
+    return `<i class="fa ${faObj.ligature}" aria-hidden="true"></i>`;
+  }
 }

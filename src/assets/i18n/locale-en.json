@@ -5,6 +5,12 @@
             "1": "Made with",
             "HEART": "♥",
             "2": "in India"
+        },
+        "COPY": {
+            "TEXT": "Copy to clipboard"
+        },
+        "DOWNLOAD": {
+            "SVG": "Download .svg file"
         }
     },
     "MAIN": {
