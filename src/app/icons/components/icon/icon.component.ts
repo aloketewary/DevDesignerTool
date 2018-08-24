@@ -8,9 +8,10 @@ import { Language } from 'angular-l10n';
 import { Component, OnInit } from '@angular/core';
 import { trigger, transition, style, animate, stagger, query } from '@angular/animations';
 import { MatBottomSheet } from '@angular/material';
-import { ObservableMedia } from '@angular/flex-layout';
+import { ObservableMedia, MediaChange } from '@angular/flex-layout';
 import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
 import { isNullOrUndefined } from 'util';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-icons',
@@ -63,11 +64,13 @@ export class IconComponent implements OnInit, OnDestroy {
   isSmallDevice: boolean;
   iconsList: Array<IconsList>;
   iconsLoading: boolean;
+  searchVal: string;
+  watcher: Subscription;
   constructor(
     configLoader: ConfigLoaderService,
     private uiService: UiService,
     private bottomSheet: MatBottomSheet,
-    private observableMedia: ObservableMedia,
+    private media: ObservableMedia,
   ) {
     this.isLoading = true;
     this.iconsLoading = true;
@@ -79,6 +82,13 @@ export class IconComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.watcher = this.media.subscribe((change: MediaChange) => {
+      if ( change.mqAlias === 'xs' || change.mqAlias === 'sm') {
+        this.isSmallDevice = true;
+      } else {
+        this.isSmallDevice = false;
+      }
+    });
     this.uiService.getIconsList().subscribe((_list) => {
       this.iconsList = _list;
       this.isLoading = false;
@@ -112,12 +122,12 @@ export class IconComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.selectedIcon = new IconsProperty();
     this.icons = new Array<IconData>();
+    this.watcher.unsubscribe();
   }
 
   selectIcon(ico) {
     this.selectedIcon = this.selectedIcon !== ico ? ico : new IconsProperty();
-    if (this.observableMedia.isActive('xs') || this.observableMedia.isActive('sm')) {
-      this.isSmallDevice = true;
+    if (!isNullOrUndefined(this.selectedIcon.name)) {
       this.openBottomSheet();
     }
   }
@@ -143,4 +153,9 @@ export class IconComponent implements OnInit, OnDestroy {
   getFAIcon(faObj: IconsProperty) {
     return `<i class="fa ${faObj.ligature}" aria-hidden="true"></i>`;
   }
+
+  getVoiceInput() {
+
+  }
+
 }

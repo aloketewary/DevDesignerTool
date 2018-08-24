@@ -47,21 +47,40 @@
           <mat-progress-bar class="progress-bar margin-50-lr" color="accent" mode="query"></mat-progress-bar>
         </ng-template>
         <ng-template #elseTemplate>
-          <div *ngIf="selectedIconList.for === config['ICONS_NAME_MATERIAL']" >
+          <div fxLayout="row" fxLayoutAlign="center center" class="flex-full">
+              <mat-form-field fxFlex="90" class="makeCenter" [floatLabel]="'never'">
+                  <input matInput type="text" placeholder="Search" [(ngModel)]="searchVal">
+                  <button mat-button *ngIf="searchVal" matSuffix mat-icon-button aria-label="Clear" (click)="searchVal = ''">
+                    <mat-icon>close</mat-icon>
+                  </button>
+                  <span matSuffix (click)="getVoiceInput()">
+                    <mat-icon>keyboard_voice</mat-icon>
+                  </span>
+                </mat-form-field>
+                <button matTooltip="Select Different Icons" matTooltipPosition="left" mat-icon-button *ngIf="isSmallDevice" [matMenuTriggerFor]="menu">
+                    <mat-icon>more_vert</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu">
+                    <button mat-menu-item *ngFor="let list of iconsList" (click)="selectedList(list)">
+                      <span>{{list.name}}</span>
+                    </button>
+                </mat-menu>
+          </div>
+          <div *ngIf="selectedIconList.for === config['ICONS_NAME_MATERIAL']">
             <div fxLayout="column" fxLayoutAlign="center start" *ngFor="let cat of icons;" class="flex-full" style="margin: 0 15;">
-              <span class="f family-lato weight-500 size-22 flex-full margin-30-tb" fxLayout="row" fxLayoutAlign="center" fxFlex>{{cat.name
+              <span *ngIf="cat?.icons.length > 0"  class="f family-lato weight-500 size-22 flex-full margin-15-t  margin-30-b" fxLayout="row" fxLayoutAlign="center" fxFlex>{{cat.name
                 | uppercase}}</span>
               <mat-divider></mat-divider>
               <div fxLayout="row" class="under-div">
                 <div [ngClass]="{'icon-pack__icon margin-5': true, 'bg-accent': ico == selectedIcon }" [matTooltip]="ico.ligature" matTooltipPosition="above"
-                  *ngFor="let ico of cat?.icons; let i=index" (click)="selectIcon(ico)" [@listAnimation]="cat?.icons?.length">
+                  *ngFor="let ico of cat?.icons | search:'keywords':searchVal; let i=index" (click)="selectIcon(ico)" [@listAnimation]="cat?.icons?.length">
                   <i class="material-icons">{{ico.ligature}}</i>
                 </div>
               </div>
             </div>
           </div>
-          <div *ngIf="selectedIconList.for === config['ICONS_NAME_MDI']" >
-              <!-- <div fxLayout="column" fxLayoutAlign="center start" *ngFor="let cat of icons;" class="flex-full" style="margin: 0 15;">
+          <div *ngIf="selectedIconList.for === config['ICONS_NAME_MDI']">
+            <!-- <div fxLayout="column" fxLayoutAlign="center start" *ngFor="let cat of icons;" class="flex-full" style="margin: 0 15;">
                 <span class="f family-lato weight-500 size-22 flex-full margin-30-tb" fxLayout="row" fxLayoutAlign="center" fxFlex>{{cat.name
                   | uppercase}}</span>
                 <mat-divider></mat-divider>
@@ -72,16 +91,16 @@
                   </div>
                 </div>
               </div> -->
-              Work in Progress
-            </div>
-          <div *ngIf="selectedIconList.for === config['ICONS_NAME_FA']" >
+            Work in Progress
+          </div>
+          <div *ngIf="selectedIconList.for === config['ICONS_NAME_FA']">
             <div fxLayout="column" fxLayoutAlign="center start" *ngFor="let cat of icons;" class="flex-full" style="margin: 0 15;">
-              <span class="f family-lato weight-500 size-22 flex-full margin-30-tb" fxLayout="row" fxLayoutAlign="center" fxFlex>{{cat.name
+              <span *ngIf="cat?.icons.length > 0"  class="f family-lato weight-500 size-22 flex-full margin-30-tb" fxLayout="row" fxLayoutAlign="center" fxFlex>{{cat.name
                 | uppercase}}</span>
               <mat-divider></mat-divider>
               <div fxLayout="row" class="under-div">
                 <div [ngClass]="{'icon-pack__icon margin-5': true, 'bg-accent': ico == selectedIcon }" [matTooltip]="ico.ligature" matTooltipPosition="above"
-                  *ngFor="let ico of cat?.icons; let i=index" (click)="selectIcon(ico)" [@listAnimation]="cat?.icons?.length">
+                  *ngFor="let ico of cat?.icons  | search:'keywords':searchVal; let i=index" (click)="selectIcon(ico)" [@listAnimation]="cat?.icons?.length">
                   <span [innerHTML]="getFAIcon(ico)"></span>
                   <!-- <i class="material-icons">{{ico.ligature}}</i> -->
                 </div>

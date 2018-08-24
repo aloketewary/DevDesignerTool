@@ -1,3 +1,4 @@
+import { SearchPipe } from './../../pipe/search.pipe';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SharedRoutingModule } from './shared-routing.module';
@@ -13,14 +14,18 @@ import {
   MatTooltipModule,
   MatListModule,
   MatBottomSheetModule,
-  MatProgressBarModule
+  MatProgressBarModule,
+  MatInputModule,
+  MatMenuModule
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { TranslationModule } from 'angular-l10n';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
     CommonModule,
+    FormsModule,
     SharedRoutingModule,
     MatToolbarModule,
     MatButtonModule,
@@ -34,13 +39,17 @@ import { TranslationModule } from 'angular-l10n';
     MatListModule,
     MatSnackBarModule,
     MatProgressBarModule,
+    MatInputModule,
+    MatMenuModule,
     TranslationModule
   ],
   declarations: [
     LoaderComponent,
+    SearchPipe
   ],
   exports: [
     LoaderComponent,
+    FormsModule,
     MatToolbarModule,
     MatButtonModule,
     MatTabsModule,
@@ -53,6 +62,9 @@ import { TranslationModule } from 'angular-l10n';
     MatListModule,
     MatSnackBarModule,
     MatProgressBarModule,
+    MatInputModule,
+    SearchPipe,
+    MatMenuModule,
     TranslationModule
   ]
 })

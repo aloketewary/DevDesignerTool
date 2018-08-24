@@ -50,4 +50,16 @@
         }
       }
     }
+
+    @media (max-width: 600px) {
+        .inner-content {
+            top: 104px;
+        }
+    }
+    
+    @media (min-width: 601px) {
+        .inner-content {
+            top: 112px;
+        }
+    }
 }

@@ -22,6 +22,7 @@ import { ScrollableDirective } from './directives/scrollable.directive';
 import { FontsComponent } from './components/fonts/fonts.component';
 import { PalletesComponent } from './components/palletes/palletes.component';
 import { PageNotFoundComponent } from './shared/components/page-not-found/page-not-found.component';
+import { SearchPipe } from './shared/pipe/search.pipe';
 const l10nConfig: L10nConfig = {
   locale: {
     languages: [
