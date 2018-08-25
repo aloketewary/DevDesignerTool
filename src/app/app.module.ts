@@ -18,11 +18,8 @@ import {
 } from 'angular-l10n';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { HttpClientModule } from '@angular/common/http';
-import { ScrollableDirective } from './directives/scrollable.directive';
-import { FontsComponent } from './components/fonts/fonts.component';
 import { PalletesComponent } from './components/palletes/palletes.component';
 import { PageNotFoundComponent } from './shared/components/page-not-found/page-not-found.component';
-import { SearchPipe } from './shared/pipe/search.pipe';
 const l10nConfig: L10nConfig = {
   locale: {
     languages: [
@@ -50,8 +47,6 @@ export function configProviderFactory(provider: ConfigLoaderService) {
   declarations: [
     AppComponent,
     HeaderComponent,
-    ScrollableDirective,
-    FontsComponent,
     PalletesComponent,
     PageNotFoundComponent,
   ],

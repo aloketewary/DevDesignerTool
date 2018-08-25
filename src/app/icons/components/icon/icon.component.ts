@@ -127,7 +127,7 @@ export class IconComponent implements OnInit, OnDestroy {
 
   selectIcon(ico) {
     this.selectedIcon = this.selectedIcon !== ico ? ico : new IconsProperty();
-    if (!isNullOrUndefined(this.selectedIcon.name)) {
+    if (!isNullOrUndefined(this.selectedIcon.name) && this.isSmallDevice) {
       this.openBottomSheet();
     }
   }

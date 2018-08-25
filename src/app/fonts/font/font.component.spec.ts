@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FontsComponent } from './fonts.component';
+import { FontComponent } from './font.component';
 
-describe('FontsComponent', () => {
-  let component: FontsComponent;
-  let fixture: ComponentFixture<FontsComponent>;
+describe('FontComponent', () => {
+  let component: FontComponent;
+  let fixture: ComponentFixture<FontComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FontsComponent ]
+      declarations: [ FontComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FontsComponent);
+    fixture = TestBed.createComponent(FontComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
