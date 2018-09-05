@@ -23,5 +23,10 @@
         "content": "TEMPLATES",
         "href": "templates",
         "label": "MAIN.TABS.TEMPLATES"
+    },
+    {
+        "content": "ABOUT",
+        "href": "about",
+        "label": "MAIN.TABS.ABOUT"
     }
 ]

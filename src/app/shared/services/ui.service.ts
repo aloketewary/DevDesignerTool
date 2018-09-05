@@ -1,3 +1,4 @@
+import { FontsData } from './../../fonts/models/fonts-data';
 import { IconsList } from './../../icons/models/icon-data';
 import { IconData } from '../../icons/models/icon-data';
 import { ConfigLoaderService } from './../../config-loader.service';
@@ -51,6 +52,15 @@ export class UiService {
   downloadIcon(iconName: string): Observable<Blob> {
     const download_endpoint = `https://material.io/tools/icons/static/icons/baseline-${iconName}-24px.svg`;
     return this.http.get(download_endpoint, {responseType: 'blob'});
+  }
+
+  public getFontsData(): Observable<FontsData[]> {
+    return this.http.get<FontsData[]>('../../assets/fonts_data.json')
+      .pipe(
+        retry(3), // retry a failed request up to 3 times
+        // map((icon: any) => icon.categories),
+        catchError(this.handleError) // then handle the error
+      );
   }
   public handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {

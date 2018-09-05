@@ -1,1 +1,13 @@
-<app-loader></app-loader>
+<div class="inner-content">
+  <div [ngClass]="{'p-b-1em margin-10-lr':true}" fxFlex>
+    <ng-container *ngIf="isLoading; then thenTemplate; else elseTemplate"></ng-container>
+    <ng-template #thenTemplate>
+      <app-loader></app-loader>
+    </ng-template>
+    <ng-template #elseTemplate>
+        <div *ngFor="let font of fontsDatas" class="f size-30" [ngStyle]="{'font-family': getFontName(font), 'src': getUrl(font)}">
+            {{font.family}}
+          </div>
+    </ng-template>
+  </div>
+</div>

@@ -12,6 +12,7 @@ import { ObservableMedia, MediaChange } from '@angular/flex-layout';
 import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
 import { isNullOrUndefined } from 'util';
 import { Subscription } from 'rxjs';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-icons',
@@ -71,10 +72,12 @@ export class IconComponent implements OnInit, OnDestroy {
     private uiService: UiService,
     private bottomSheet: MatBottomSheet,
     private media: ObservableMedia,
+    private titleService: Title
   ) {
     this.isLoading = true;
     this.iconsLoading = true;
     this.config = configLoader.getConfigData();
+    this.titleService.setTitle(`${this.config['PROJECT_NAME']} | Icons Library`);
     this.selectedIcon = new IconsProperty();
     this.selectedIconList = new IconsList();
     this.icons = new Array<IconData>();
