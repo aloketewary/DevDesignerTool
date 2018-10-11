@@ -8,7 +8,7 @@ const routes: Routes = [
   { path: 'icons', loadChildren: './icons/icons.module#IconsModule' },
   { path: 'fonts', loadChildren: './fonts/fonts.module#FontsModule' },
   { path: 'palletes', component: PalletesComponent },
-  // { path: 'about', component: PalletesComponent },
+  { path: 'about', loadChildren: './about/about.module#AboutModule' },
   { path: 'colors', loadChildren: './colors/color.module#ColorModule' },
   { path: '**', component: PageNotFoundComponent, pathMatch: 'full' }
 ];

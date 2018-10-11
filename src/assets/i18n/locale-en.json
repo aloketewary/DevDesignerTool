@@ -19,7 +19,8 @@
             "FONT": "Fonts",
             "ICON": "Icons",
             "PALLETE": "Pallete",
-            "TEMPLATES": "Templates"
+            "TEMPLATES": "Templates",
+            "ABOUT": "About"
         }
     },
     "ICONS": {

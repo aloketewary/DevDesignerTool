@@ -1,11 +1,12 @@
 // Import all the tools needed to customize the theme and extract parts of it
 @import '~@angular/material/theming';
 // Define a mixin that accepts a theme and outputs the color styles for the component.
-@mixin theme-colors($theme) {
+@mixin theme-colors($theme, $devDarkTheme) {
     // Extract whichever individual palettes you need from the theme.
     $primary: map-get($theme, primary);
     $accent: map-get($theme, accent); // Use mat-color to extract individual colors from a palette as necessary.
-    
+    $darkPrimary: map-get($devDarkTheme, primary);
+    $darkAccent: map-get($devDarkTheme, accent);
     .col {
         &-accent {
             color: mat-color($accent, A200) !important;
@@ -27,39 +28,76 @@
             color: #ffffff !important;
         }
     }
-
     .col-gradient {
         flex: 1 1 auto;
-      text-transform: uppercase;
-      transition: 0.5s;
-      background-size: 200% auto;
-     /* text-shadow: 0px 0px 10px rgba(0,0,0,0.2);*/
-      box-shadow: 0 0 20px #eee;
-      &.always {
-        color: mat-color($accent, 500);
-        background-image: linear-gradient(to right, mat-color($primary, 600)  0%, mat-color($primary, 300) 51%, mat-color($primary, 600) 100%);
-        &:hover {
-            color: mat-color($primary, 700);
-        }
-      }
-      &.selected{
-        color: mat-color($primary, 700);
-        background-image: linear-gradient(to right, mat-color($accent, 500) 0%, mat-color($accent, 300) 51%, mat-color($accent, 500) 100%);
-        &:hover {
+        text-transform: uppercase;
+        transition: 0.5s;
+        background-size: 200% auto;
+        /* text-shadow: 0px 0px 10px rgba(0,0,0,0.2);*/
+        box-shadow: 0 0 20px #eee;
+        &.always {
             color: mat-color($accent, 500);
+            background-image: linear-gradient(to right, mat-color($primary, 600) 0%, mat-color($primary, 300) 51%, mat-color($primary, 600) 100%);
+            &:hover {
+                color: mat-color($primary, 700);
+            }
         }
-      }
+        &.selected {
+            color: mat-color($primary, 700);
+            background-image: linear-gradient(to right, mat-color($accent, 500) 0%, mat-color($accent, 300) 51%, mat-color($accent, 500) 100%);
+            &:hover {
+                color: mat-color($accent, 500);
+            }
+        }
     }
-
     @media (max-width: 600px) {
         .inner-content {
             top: 104px;
         }
     }
-    
     @media (min-width: 601px) {
         .inner-content {
             top: 112px;
+        }
+    }
+    .devdesign-dark-theme {
+        .col {
+            &-accent {
+                color: mat-color($darkAccent, A200) !important;
+            }
+            &-primary {
+                color: mat-color($darkPrimary, 700) !important;
+            }
+        }
+        .bg {
+            &-accent {
+                background-color: mat-color($darkAccent, A200) !important;
+            }
+            &-primary {
+                background-color: mat-color($darkPrimary, 700) !important;
+            }
+        }
+        .col-gradient {
+            flex: 1 1 auto;
+            text-transform: uppercase;
+            transition: 0.5s;
+            background-size: 200% auto;
+            /* text-shadow: 0px 0px 10px rgba(0,0,0,0.2);*/
+            box-shadow: 0 0 20px #eee;
+            &.always {
+                color: mat-color($darkAccent, 500);
+                background-image: linear-gradient(to right, mat-color($darkPrimary, 600) 0%, mat-color($darkPrimary, 300) 51%, mat-color($darkPrimary, 600) 100%);
+                &:hover {
+                    color: mat-color($darkPrimary, 700);
+                }
+            }
+            &.selected {
+                color: mat-color($darkPrimary, 700);
+                background-image: linear-gradient(to right, mat-color($darkAccent, 500) 0%, mat-color($darkAccent, 300) 51%, mat-color($darkAccent, 500) 100%);
+                &:hover {
+                    color: mat-color($darkAccent, 500);
+                }
+            }
         }
     }
 }

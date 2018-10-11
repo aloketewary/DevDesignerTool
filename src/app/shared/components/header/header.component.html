@@ -1,4 +1,4 @@
-<mat-toolbar color="primary">
+<mat-toolbar color="primary" [ngClass]="{'shrink-toolbar': shrinkToolbar}" fxLayoutGap="10px">
   <div fxLayout="column" fxLayoutAlign="center start">
     <span class="f family-lato size-30 margin-15-t">{{'APP.NAME' | translate:lang}}</span>
     <span class="f family-lato size-12 margin--6-t margin-5-l">{{'APP.SUBNAME.1' | translate:lang}} <span class="col-red">{{'APP.SUBNAME.HEART'
@@ -6,6 +6,15 @@
   </div>
   <!-- This fills the remaining space of the current row -->
   <span class="fill-remaining-space"></span>
+  <button mat-button>
+    {{_appVersion}}
+  </button>
+  <button mat-icon-button (click)="changeTheme()">
+    <mat-icon>format_color_fill</mat-icon>
+  </button>
+  <a target="_blank" mat-button href="https://github.com/aloketewary/DevDesignerTool">
+    <mat-icon svgIcon="github-circle"></mat-icon> Github
+  </a>
   <!-- <span>Right Aligned Text</span> -->
 </mat-toolbar>
 <!-- <ng-container *ngIf="(asyncTabs | async) === null">

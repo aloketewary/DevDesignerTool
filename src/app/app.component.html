@@ -1,4 +1,4 @@
-<div class="app-root-style">
+<div [ngClass]="{'app-root-style': true, 'devdesign-dark-theme': themeUsed('devdesign-dark-theme')}">
     <app-header></app-header>
     <router-outlet></router-outlet>
 </div>
