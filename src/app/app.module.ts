@@ -69,8 +69,8 @@ export class AppModule {
     matIconRegistry: MatIconRegistry,
     domSanitizer: DomSanitizer,
     public l10nLoader: L10nLoader) {
-    // this.overlayContainer.getContainerElement().classList.add('scorius-alt-theme');
-    // matIconRegistry.addSvgIconSet(domSanitizer.bypassSecurityTrustResourceUrl('./assets/icons/mdi.svg'));
+    this.overlayContainer.getContainerElement().classList.add('devdesign-dark-theme');
+    matIconRegistry.addSvgIconSet(domSanitizer.bypassSecurityTrustResourceUrl('./assets/icons/mdi.svg'));
     this.l10nLoader.load();
   }
 }

@@ -32,11 +32,50 @@
             <mat-toolbar color="primary">
               <span class="f family-lato size-22 weight-400">{{selectedIcon?.name | uppercase}}</span>
             </mat-toolbar>
-            <button mat-mini-fab color="accent" (click)="openBottomSheet()" class="fab-icon">
+            <!-- <button mat-mini-fab color="accent" (click)="openBottomSheet()" class="fab-icon">
               <mat-icon>content_copy</mat-icon>
-            </button>
+            </button> -->
             <mat-card-content>
-              Working in progress......
+              <mat-nav-list>
+                <h3 mat-subheader>Icons and Usage</h3>
+                <mat-list-item>
+                  <mat-icon *ngIf="selectedIconList.for !== config['ICONS_NAME_FA']" color="primary" mat-list-icon>{{selectedIcon.ligature}}</mat-icon>
+                  <span  *ngIf="selectedIconList.for === config['ICONS_NAME_FA']" [innerHTML]="getFAIcon(selectedIcon)" mat-list-icon></span>
+                  <h4 mat-line>{{copyMatForModernBrowser}}</h4>
+                  <p mat-line> For modern browsers </p>
+                  <button mat-icon-button (click)="copyMessage(copyMatForModernBrowser)" matTooltip="{{'APP.COPY.TEXT' | translate:lang}}" matTooltipPosition="above">
+                    <mat-icon>content_copy</mat-icon>
+                  </button>
+                </mat-list-item>
+                <mat-list-item>
+                  <mat-icon *ngIf="selectedIconList.for !== config['ICONS_NAME_FA']" color="primary" mat-list-icon>{{selectedIcon.ligature}}</mat-icon>
+                  <span  *ngIf="selectedIconList.for === config['ICONS_NAME_FA']" [innerHTML]="getFAIcon(selectedIcon)" mat-list-icon></span>
+                  <h4 mat-line>{{copyMatForOlderBrowser}}</h4>
+                  <p mat-line> For older browsers </p>
+                  <button mat-icon-button (click)="copyMessage(copyMatForModernBrowser)" matTooltip="{{'APP.COPY.TEXT' | translate:lang}}" matTooltipPosition="above">
+                    <mat-icon>content_copy</mat-icon>
+                  </button>
+                </mat-list-item>
+                <mat-list-item>
+                  <mat-icon *ngIf="selectedIconList.for !== config['ICONS_NAME_FA']" color="primary" mat-list-icon>{{selectedIcon.ligature}}</mat-icon>
+                  <span  *ngIf="selectedIconList.for === config['ICONS_NAME_FA']" [innerHTML]="getFAIcon(selectedIcon)" mat-list-icon></span>
+                  <h4 mat-line><strong>{{selectedIcon.ligature}}</strong></h4>
+                  <p mat-line> Only Icon name </p>
+                  <button mat-icon-button (click)="copyMessage(selectedIcon.ligature)" matTooltip="{{'APP.COPY.TEXT' | translate:lang}}" matTooltipPosition="above">
+                    <mat-icon>content_copy</mat-icon>
+                  </button>
+                </mat-list-item>
+                <mat-divider></mat-divider>
+                <h3 mat-subheader>Assets</h3>
+                <mat-list-item *ngIf="selectedIconList.for !== config['ICONS_NAME_FA']">
+                  <mat-icon mat-list-icon>note</mat-icon>
+                  <h4 mat-line>Download .svg file</h4>
+                  <p mat-line>svg are best for responsiveness</p>
+                  <button mat-icon-button (click)="downloadFile(selectedIcon.ligature)" matTooltip="{{'APP.DOWNLOAD.SVG' | translate:lang}}" matTooltipPosition="above">
+                      <mat-icon>file_download</mat-icon>
+                  </button>
+                </mat-list-item>
+              </mat-nav-list>
             </mat-card-content>
           </mat-card>
         </div>
@@ -66,7 +105,7 @@
                     </button>
                 </mat-menu>
           </div>
-          <div *ngIf="selectedIconList.for === config['ICONS_NAME_MATERIAL']">
+          <div *ngIf="selectedIconList.for === config['ICONS_NAME_MATERIAL']" class="flex-full">
             <div fxLayout="column" fxLayoutAlign="center start" *ngFor="let cat of icons;" class="flex-full" style="margin: 0 15;">
               <span *ngIf="cat?.icons.length > 0"  class="f family-lato weight-500 size-22 flex-full margin-15-t  margin-30-b" fxLayout="row" fxLayoutAlign="center" fxFlex>{{cat.name
                 | uppercase}}</span>
@@ -101,7 +140,7 @@
               <div fxLayout="row" class="under-div">
                 <div [ngClass]="{'icon-pack__icon margin-5': true, 'bg-accent': ico == selectedIcon }" [matTooltip]="ico.ligature" matTooltipPosition="above"
                   *ngFor="let ico of cat?.icons  | search:'keywords':searchVal; let i=index" (click)="selectIcon(ico)" [@listAnimation]="cat?.icons?.length">
-                  <span [innerHTML]="getFAIcon(ico)"></span>
+                  <span><i class="fa {{ico.ligature}}" aria-hidden="true"></i></span>
                   <!-- <i class="material-icons">{{ico.ligature}}</i> -->
                 </div>
               </div>

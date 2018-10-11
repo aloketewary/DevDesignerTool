@@ -1,18 +1,19 @@
-import { IconsList } from './../../models/icon-data';
-import { UiService } from './../../../shared/services/ui.service';
-import { ConfigLoaderService } from 'src/app/config-loader.service';
-import { Config } from './../../../models/config';
-import { IconsProperty, IconData } from '../../models/icon-data';
-import { IconBottomSheetComponent } from '../icon-bottom-sheet/icon-bottom-sheet.component';
 import { Language } from 'angular-l10n';
-import { Component, OnInit } from '@angular/core';
-import { trigger, transition, style, animate, stagger, query } from '@angular/animations';
-import { MatBottomSheet } from '@angular/material';
-import { ObservableMedia, MediaChange } from '@angular/flex-layout';
-import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
-import { isNullOrUndefined } from 'util';
 import { Subscription } from 'rxjs';
-import { Title } from '@angular/platform-browser';
+import { ConfigLoaderService } from 'src/app/config-loader.service';
+import { isNullOrUndefined } from 'util';
+
+import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
+import { Component, OnInit } from '@angular/core';
+import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
+import { MediaChange, ObservableMedia } from '@angular/flex-layout';
+import { MatBottomSheet, MatSnackBar } from '@angular/material';
+import { Title, DomSanitizer } from '@angular/platform-browser';
+
+import { Config } from '../../../models/config';
+import { UiService } from '../../../shared/services/ui.service';
+import { IconData, IconsList, IconsProperty } from '../../models/icon-data';
+import { IconBottomSheetComponent } from '../icon-bottom-sheet/icon-bottom-sheet.component';
 
 @Component({
   selector: 'app-icons',
@@ -67,12 +68,16 @@ export class IconComponent implements OnInit, OnDestroy {
   iconsLoading: boolean;
   searchVal: string;
   watcher: Subscription;
+  copyMatForModernBrowser: string;
+  copyMatForOlderBrowser: string;
   constructor(
     configLoader: ConfigLoaderService,
     private uiService: UiService,
     private bottomSheet: MatBottomSheet,
     private media: ObservableMedia,
-    private titleService: Title
+    private titleService: Title,
+    public snackBar: MatSnackBar,
+    private sanitizer: DomSanitizer
   ) {
     this.isLoading = true;
     this.iconsLoading = true;
@@ -133,6 +138,13 @@ export class IconComponent implements OnInit, OnDestroy {
     if (!isNullOrUndefined(this.selectedIcon.name) && this.isSmallDevice) {
       this.openBottomSheet();
     }
+    if (this.selectedIconList.for === this.config['ICONS_NAME_MATERIAL']) {
+      this.copyMatForModernBrowser = `<i class="material-icons">${this.selectedIcon.ligature}</i>`;
+      this.copyMatForOlderBrowser = `<i class="material-icons">${this.selectedIcon.ligature}</i>`;
+    } else if (this.selectedIconList.for === this.config['ICONS_NAME_FA']) {
+      this.copyMatForModernBrowser = `<i class="fa ${this.selectedIcon.ligature}" aria-hidden="true"></i>`;
+      this.copyMatForOlderBrowser = `<i class="fa ${this.selectedIcon.ligature}" aria-hidden="true"></i>`;
+    }
   }
 
   selectedList(iconList) {
@@ -161,4 +173,35 @@ export class IconComponent implements OnInit, OnDestroy {
 
   }
 
+  // openLink(event: MouseEvent): void {
+  //   this.bottomSheetRef.dismiss();
+  //   event.preventDefault();
+  // }
+
+  copyMessage(val: string) {
+    const selBox = document.createElement('textarea');
+    selBox.style.position = 'fixed';
+    selBox.style.left = '0';
+    selBox.style.top = '0';
+    selBox.style.opacity = '0';
+    selBox.value = val;
+    document.body.appendChild(selBox);
+    selBox.focus();
+    selBox.select();
+    document.execCommand('copy');
+    document.body.removeChild(selBox);
+    this.openSnackBar('Copy Successfully to the clipboard!');
+  }
+
+  openSnackBar(message: string, action?: string) {
+    this.snackBar.open(message, action, {
+      duration: 2000,
+    });
+  }
+
+  downloadFile(iconName: string) {
+    this.uiService.downloadIcon(iconName).subscribe((data) => {
+      saveAs(data, `${iconName}.svg`);
+    });
+  }
 }
