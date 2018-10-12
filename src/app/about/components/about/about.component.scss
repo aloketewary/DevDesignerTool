@@ -3,3 +3,19 @@
     height: 300px;
     background: no-repeat top center / cover;
 }
+
+.main {
+	width: 80%;
+	margin-left: 10%;
+    margin-top: 80px;
+    & h1 {
+        font-size: 80px;
+        line-height: 60px;
+    }
+    & p {
+        font-size: 13px;
+        line-height: 20px;
+        font-family: serif;
+        text-align: right;
+    }
+}
