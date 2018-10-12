@@ -3,13 +3,13 @@
     "MAIN_TABS" : "main_tabs",
     "LOCALE" : "locale-",
     "ICONS_COLLECTION" : "icons",
-    "APP_CONFIG_LOCATION" : "https://raw.githubusercontent.com/aloketewary/DevDesignerTool/master/docs/config/app_config.json",
-    "MAIN_TABS_URL" : "https://raw.githubusercontent.com/aloketewary/DevDesignerTool/master/docs/config/main_tabs.json",
-    "ICONS_DATA_URL" : "https://raw.githubusercontent.com/aloketewary/DevDesignerTool/master/docs/config/icon_data.json",
-    "COLORS_DATA_URL" : "https://raw.githubusercontent.com/aloketewary/DevDesignerTool/master/docs/config/color_data.json",
-    "ICONS_LIST_URL": "https://raw.githubusercontent.com/aloketewary/DevDesignerTool/master/docs/config/icons_list.json",
+    "APP_CONFIG_LOCATION" : "https://www.jasonbase.com/things/mxwX.json",
+    "MAIN_TABS_URL" : "https://www.jasonbase.com/things/GKmq.json",
+    "ICONS_DATA_URL" : "https://www.jasonbase.com/things/ZAbe.json",
+    "COLORS_DATA_URL" : "https://www.jasonbase.com/things/Q0W0.json",
+    "ICONS_LIST_URL": "https://www.jasonbase.com/things/nRor.json",
     "ICONS_NAME_MATERIAL": "material",
     "ICONS_NAME_MDI": "mdi",
     "ICONS_NAME_FA": "fa",
-    "FA_ICONS_DATA_URL" : "https://raw.githubusercontent.com/aloketewary/DevDesignerTool/master/docs/config/font_awesome_icon_data.json"
+    "FA_ICONS_DATA_URL" : "https://www.jasonbase.com/things/q4WP.json"
 }
