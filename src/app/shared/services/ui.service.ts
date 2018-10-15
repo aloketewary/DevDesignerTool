@@ -31,7 +31,7 @@ export class UiService {
   }
 
   public getIconsData(url: string): Observable<IconData[]> {
-    return this.http.get<IconData[]>(url, HttpOptions)
+    return this.http.get<IconData[]>(url)
       .pipe(
         retry(3), // retry a failed request up to 3 times
         map((icon: any) => icon.categories),
@@ -40,7 +40,7 @@ export class UiService {
   }
 
   public getMainTabs(): Observable<MainTabs[]> {
-    return this.http.get<MainTabs[]>(this.config['MAIN_TABS_URL'], HttpOptions)
+    return this.http.get<MainTabs[]>(this.config['MAIN_TABS_URL'])
       .pipe(
         retry(3), // retry a failed request up to 3 times
         catchError(this.handleError) // then handle the error
@@ -48,7 +48,7 @@ export class UiService {
   }
 
   public getIconsList(): Observable<IconsList[]> {
-    return this.http.get<IconsList[]>(this.config['ICONS_LIST_URL'], HttpOptions)
+    return this.http.get<IconsList[]>(this.config['ICONS_LIST_URL'])
       .pipe(
         retry(3), // retry a failed request up to 3 times
         // map((icon: any) => icon.categories),
@@ -62,7 +62,7 @@ export class UiService {
   }
 
   public getFontsData(): Observable<FontsData[]> {
-    return this.http.get<FontsData[]>('../../assets/fonts_data.json')
+    return this.http.get<FontsData[]>(this.config['FONTS_DATA_URL'])
       .pipe(
         retry(3), // retry a failed request up to 3 times
         // map((icon: any) => icon.categories),
@@ -71,7 +71,7 @@ export class UiService {
   }
 
   public getChangeLog(): Observable<AboutModel[]> {
-    return this.http.get<AboutModel[]>(this.config['ABOUT_DATA_URL'], HttpOptions)
+    return this.http.get<AboutModel[]>(this.config['ABOUT_DATA_URL'])
     .pipe(
       retry(3), // retry a failed request up to 3 times
       // map((icon: any) => icon.categories),

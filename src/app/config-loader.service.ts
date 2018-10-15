@@ -26,7 +26,7 @@ export class ConfigLoaderService {
 
   load(): Promise<any> {
     console.log(`getSettings:: before http.get call`);
-    const promise = this.http.get(Constants.APP_CONFIG_LOCATION, HttpOptions)
+    const promise = this.http.get(Constants.APP_CONFIG_LOCATION)
       .toPromise()
       .then((settings: Config) => {
         this.config = settings;

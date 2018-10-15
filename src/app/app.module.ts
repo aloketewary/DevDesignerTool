@@ -25,10 +25,10 @@ import { PageNotFoundComponent } from './shared/components/page-not-found/page-n
 const l10nConfig: L10nConfig = {
   locale: {
     languages: [
-      { code: 'en', dir: 'ltr' },
+      { code: 'en.json', dir: 'ltr' },
       { code: 'nl', dir: 'ltr' }
     ],
-    language: 'en',
+    language: 'en.json',
     storage: StorageStrategy.Cookie
   },
   translation: {

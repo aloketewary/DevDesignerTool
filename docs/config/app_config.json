@@ -12,6 +12,6 @@
     "ICONS_NAME_MDI": "mdi",
     "ICONS_NAME_FA": "fa",
     "FA_ICONS_DATA_URL" : "https://raw.githubusercontent.com/aloketewary/DevDesignerTool/master/docs/config/font_awesome_icon_data.json",
-    "ABOUT_DATA_URL": "https://www.jasonbase.com/things/EGkP.json",
+    "ABOUT_DATA_URL": "https://raw.githubusercontent.com/aloketewary/DevDesignerTool/master/docs/config/about_data.json",
     "FONTS_DATA_URL": "https://raw.githubusercontent.com/aloketewary/DevDesignerTool/master/docs/config/fonts_data.json"
 }
