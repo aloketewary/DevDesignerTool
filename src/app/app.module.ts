@@ -1,3 +1,4 @@
+import { Constants } from './shared/class/constants';
 import { HeaderComponent } from './shared/components/header/header.component';
 import { SharedModule } from './shared/modules/shared/shared.module';
 import { ConfigLoaderService } from './config-loader.service';
@@ -15,6 +16,7 @@ import {
   ProviderType,
   StorageStrategy,
   TranslationModule,
+  TranslationService,
 } from 'angular-l10n';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { HttpClientModule } from '@angular/common/http';
@@ -31,7 +33,8 @@ const l10nConfig: L10nConfig = {
   },
   translation: {
     providers: [
-      { type: ProviderType.Static, prefix: './assets/i18n/locale-' }
+      { type: ProviderType.WebAPI, path: Constants.LOCALE_EN },
+      // { type: ProviderType.Fallback, prefix: './assets/i18n/locale-' }
     ],
     caching: true,
     missingValue: 'No key',
@@ -68,9 +71,11 @@ export class AppModule {
   constructor(private overlayContainer: OverlayContainer,
     matIconRegistry: MatIconRegistry,
     domSanitizer: DomSanitizer,
-    public l10nLoader: L10nLoader) {
+    public l10nLoader: L10nLoader,
+    private translation: TranslationService) {
     this.overlayContainer.getContainerElement().classList.add('devdesign-dark-theme');
     matIconRegistry.addSvgIconSet(domSanitizer.bypassSecurityTrustResourceUrl('./assets/icons/mdi.svg'));
+    this.translation.translationError.subscribe((error: any) => console.log(error));
     this.l10nLoader.load();
   }
 }

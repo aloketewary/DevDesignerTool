@@ -1,9 +1,17 @@
-import { AboutComponent } from './components/about/about.component';
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
+
+import { AboutComponent } from './components/about/about.component';
+import { AboutResolver } from './resolver/about.resolver';
 
 const routes: Routes = [
-  {path: '', component: AboutComponent, pathMatch: 'full'}
+  {
+    path: '', component:
+      AboutComponent,
+    pathMatch: 'full',
+    resolve: { about: AboutResolver },
+    runGuardsAndResolvers: 'always',
+  }
 ];
 
 @NgModule({

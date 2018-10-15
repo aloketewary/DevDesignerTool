@@ -1,8 +1,14 @@
 import { Constants } from './shared/class/constants';
 import { Config } from './models/config';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
+export const HttpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json',
+    'secret-key': '$2a$10$VV2Zl2sZpLWFSifl6gZ3aurw6hbi8ExBJXXM777pqu8zfl4Db5Aua'
+  })
+};
 @Injectable({
   providedIn: 'root'
 })
@@ -20,7 +26,7 @@ export class ConfigLoaderService {
 
   load(): Promise<any> {
     console.log(`getSettings:: before http.get call`);
-    const promise = this.http.get(Constants.APP_CONFIG_LOCATION)
+    const promise = this.http.get(Constants.APP_CONFIG_LOCATION, HttpOptions)
       .toPromise()
       .then((settings: Config) => {
         this.config = settings;

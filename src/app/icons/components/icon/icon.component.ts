@@ -194,6 +194,7 @@ export class IconComponent implements OnInit, OnDestroy {
   }
 
   openSnackBar(message: string, action?: string) {
+    this.selectedIcon = new IconsProperty();
     this.snackBar.open(message, action, {
       duration: 2000,
     });

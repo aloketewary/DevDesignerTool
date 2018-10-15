@@ -1,0 +1,41 @@
+{
+    "APP": {
+      "NAME": "Dev Designer Tool",
+      "SUBNAME": {
+        "1": "Made with",
+        "HEART": "♥",
+        "2": "in India"
+      },
+      "COPY": {
+        "TEXT": "Copy to clipboard"
+      },
+      "DOWNLOAD": {
+        "SVG": "Download .svg file"
+      }
+    },
+    "MAIN": {
+      "TABS": {
+        "COLOR": "Colors",
+        "FONT": "Fonts",
+        "ICON": "Icons",
+        "PALLETE": "Pallete",
+        "TEMPLATES": "Templates",
+        "ABOUT": "About"
+      }
+    },
+    "ICONS": {
+      "ICONS_LIST": {
+        "GROUP": {
+          "BY": "by"
+        }
+      }
+    },
+    "ABOUT": {
+      "CHANGELOG": {
+        "CAPTION": "Changelog"
+      },
+      "SUBTITLE": {
+        "TEXT": "Created to help faster development in apps..."
+      }
+    }
+  }

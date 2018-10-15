@@ -1,3 +1,4 @@
+import { AboutResolver } from './resolver/about.resolver';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -11,6 +12,9 @@ import { AboutComponent } from './components/about/about.component';
     AboutRoutingModule,
     SharedModule
   ],
-  declarations: [AboutComponent]
+  declarations: [AboutComponent],
+  providers: [
+    AboutResolver
+  ]
 })
 export class AboutModule { }

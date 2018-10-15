@@ -21,7 +21,7 @@
   Loading tabs...
 </ng-container> -->
 
-<nav mat-tab-nav-bar mat-stretch-tabs [color]="'primary'" [backgroundColor]="'accent'">
+<nav mat-tab-nav-bar mat-stretch-tabs [color]="'primary'" [backgroundColor]="'accent'" class="flex-full">
   <a mat-tab-link *ngFor="let tab of asyncTabs" (click)="gotoRoute(tab)" [active]="state.activeTab == tab">
     {{tab?.label | translate:lang}}
   </a>

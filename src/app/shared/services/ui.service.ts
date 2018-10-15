@@ -1,3 +1,4 @@
+import { AboutModel } from './../../about/model/about.model';
 import { FontsData } from './../../fonts/models/fonts-data';
 import { IconsList } from './../../icons/models/icon-data';
 import { IconData } from '../../icons/models/icon-data';
@@ -6,9 +7,15 @@ import { Config } from './../../models/config';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { retry, catchError, map } from 'rxjs/operators';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { MainTabs } from '../model/main-tabs';
 
+export const HttpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json',
+    'secret-key': '$2a$10$VV2Zl2sZpLWFSifl6gZ3aurw6hbi8ExBJXXM777pqu8zfl4Db5Aua'
+  })
+};
 @Injectable({
   providedIn: 'root'
 })
@@ -24,7 +31,7 @@ export class UiService {
   }
 
   public getIconsData(url: string): Observable<IconData[]> {
-    return this.http.get<IconData[]>(url)
+    return this.http.get<IconData[]>(url, HttpOptions)
       .pipe(
         retry(3), // retry a failed request up to 3 times
         map((icon: any) => icon.categories),
@@ -33,7 +40,7 @@ export class UiService {
   }
 
   public getMainTabs(): Observable<MainTabs[]> {
-    return this.http.get<MainTabs[]>(this.config['MAIN_TABS_URL'])
+    return this.http.get<MainTabs[]>(this.config['MAIN_TABS_URL'], HttpOptions)
       .pipe(
         retry(3), // retry a failed request up to 3 times
         catchError(this.handleError) // then handle the error
@@ -41,7 +48,7 @@ export class UiService {
   }
 
   public getIconsList(): Observable<IconsList[]> {
-    return this.http.get<IconsList[]>(this.config['ICONS_LIST_URL'])
+    return this.http.get<IconsList[]>(this.config['ICONS_LIST_URL'], HttpOptions)
       .pipe(
         retry(3), // retry a failed request up to 3 times
         // map((icon: any) => icon.categories),
@@ -51,7 +58,7 @@ export class UiService {
 
   downloadIcon(iconName: string): Observable<Blob> {
     const download_endpoint = `https://material.io/tools/icons/static/icons/baseline-${iconName}-24px.svg`;
-    return this.http.get(download_endpoint, {responseType: 'blob'});
+    return this.http.get(download_endpoint, { responseType: 'blob' });
   }
 
   public getFontsData(): Observable<FontsData[]> {
@@ -61,6 +68,15 @@ export class UiService {
         // map((icon: any) => icon.categories),
         catchError(this.handleError) // then handle the error
       );
+  }
+
+  public getChangeLog(): Observable<AboutModel[]> {
+    return this.http.get<AboutModel[]>(this.config['ABOUT_DATA_URL'], HttpOptions)
+    .pipe(
+      retry(3), // retry a failed request up to 3 times
+      // map((icon: any) => icon.categories),
+      catchError(this.handleError) // then handle the error
+    );
   }
   public handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
