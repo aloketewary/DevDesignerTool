@@ -1,7 +1,6 @@
 import { Language } from 'angular-l10n';
 import { Subscription } from 'rxjs';
 import { ConfigLoaderService } from 'src/app/config-loader.service';
-import { isNullOrUndefined } from 'util';
 
 import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
@@ -91,7 +90,7 @@ export class IconComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.watcher = this.media.subscribe((change: MediaChange) => {
-      if ( change.mqAlias === 'xs' || change.mqAlias === 'sm') {
+      if (change.mqAlias === 'xs' || change.mqAlias === 'sm') {
         this.isSmallDevice = true;
       } else {
         this.isSmallDevice = false;
@@ -100,7 +99,7 @@ export class IconComponent implements OnInit, OnDestroy {
     this.uiService.getIconsList().subscribe((_list) => {
       this.iconsList = _list;
       this.isLoading = false;
-      this.selectedIconList = isNullOrUndefined(_list) ? new IconsList() : _list[0];
+      this.selectedIconList = (_list === null || _list === undefined) ? new IconsList() : _list[0];
       this.getIconsData();
     });
   }
@@ -135,7 +134,7 @@ export class IconComponent implements OnInit, OnDestroy {
 
   selectIcon(ico) {
     this.selectedIcon = this.selectedIcon !== ico ? ico : new IconsProperty();
-    if (!isNullOrUndefined(this.selectedIcon.name) && this.isSmallDevice) {
+    if (this.selectedIcon.name !== null || this.selectedIcon.name !== undefined && this.isSmallDevice) {
       this.openBottomSheet();
     }
     if (this.selectedIconList.for === this.config['ICONS_NAME_MATERIAL']) {
@@ -162,7 +161,7 @@ export class IconComponent implements OnInit, OnDestroy {
   }
 
   openBottomSheet(): void {
-    this.bottomSheet.open(IconBottomSheetComponent, { data: {icon: this.selectedIcon, listFor: this.selectedIconList} });
+    this.bottomSheet.open(IconBottomSheetComponent, { data: { icon: this.selectedIcon, listFor: this.selectedIconList } });
   }
 
   getFAIcon(faObj: IconsProperty) {

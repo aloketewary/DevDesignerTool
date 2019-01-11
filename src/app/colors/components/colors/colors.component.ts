@@ -95,7 +95,7 @@ export class ColorsComponent implements OnInit {
   }
 
   checkForDarkColor(colorWeight: string | number) {
-    return Number(isNumber(colorWeight) ? colorWeight : colorWeight.replace('A', '')) > 300;
+    return Number(typeof colorWeight === 'number' ? colorWeight : colorWeight.replace('A', '')) > 300;
   }
 
   getTranslationText(isPrimary: boolean) {
