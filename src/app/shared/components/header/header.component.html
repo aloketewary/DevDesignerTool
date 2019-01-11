@@ -1,27 +1,68 @@
 <mat-toolbar color="primary" [ngClass]="{'shrink-toolbar': shrinkToolbar}" fxLayoutGap="10px">
   <div fxLayout="column" fxLayoutAlign="center start">
-    <span class="f family-lato size-30 margin-15-t">{{'APP.NAME' | translate:lang}}</span>
-    <span class="f family-lato size-12 margin--6-t margin-5-l">{{'APP.SUBNAME.1' | translate:lang}} <span class="col-red">{{'APP.SUBNAME.HEART'
+    <span class="f family-kaushan size-30 margin-15-t">{{'APP.NAME' | translate:lang}}</span>
+    <span class="f family-kaushan size-12 margin--6-t margin-5-l">{{'APP.SUBNAME.1' | translate:lang}} <span class="col-red">{{'APP.SUBNAME.HEART'
         | translate:lang}}</span> {{'APP.SUBNAME.2' | translate:lang}}</span>
   </div>
   <!-- This fills the remaining space of the current row -->
   <span class="fill-remaining-space"></span>
-  <button mat-button>
+  <button mat-button fxHide="true" fxShow.gt-sm [matTooltip]="'APP.HEADER.VERSION' | translate:lang" matTooltipPosition="below">
     {{_appVersion}}
   </button>
-  <button mat-icon-button (click)="changeTheme()">
+  <button mat-icon-button [matMenuTriggerFor]="translationMenu" fxHide="true" fxShow.gt-xs [matTooltip]="'APP.HEADER.TRANSLATE' | translate:lang"
+    matTooltipPosition="below">
+    <mat-icon>translate</mat-icon>
+  </button>
+  <mat-menu #translationMenu="matMenu">
+    <button mat-menu-item *ngFor="let language of languageList; let i=index" (click)="selectLanguage(language.code)">
+      <mat-icon>{{language.code === lang ? 'done_all' : ''}}</mat-icon>
+      <span>{{language.name}}</span>
+    </button>
+  </mat-menu>
+  <button mat-icon-button (click)="changeTheme()" fxHide="true" fxShow.gt-xs [matTooltip]="'APP.HEADER.THEME' | translate:lang"
+    matTooltipPosition="below">
     <mat-icon>format_color_fill</mat-icon>
   </button>
-  <a target="_blank" mat-button href="https://github.com/aloketewary/DevDesignerTool">
-    <mat-icon svgIcon="github-circle"></mat-icon> Github
+  <a target="_blank" mat-icon-button href="https://twitter.com/aloketewary" fxHide="true" fxShow.gt-sm [matTooltip]="'APP.HEADER.TWITTER' | translate:lang"
+    matTooltipPosition="below">
+    <mat-icon svgIcon="twitter"></mat-icon>
   </a>
+  <a target="_blank" mat-icon-button href="https://github.com/aloketewary/DevDesignerTool" fxHide="true" fxShow.gt-sm
+    [matTooltip]="'APP.HEADER.GITHUB' | translate:lang" matTooltipPosition="below">
+    <mat-icon svgIcon="github-circle"></mat-icon>
+  </a>
+  <button mat-icon-button [matMenuTriggerFor]="responsiveMenu" fxHide="true" fxShow.lt-md>
+    <mat-icon>more_vert</mat-icon>
+  </button>
+  <mat-menu #responsiveMenu="matMenu">
+    <button mat-menu-item>
+      <mat-icon>info</mat-icon>
+      <span>{{'APP.HEADER.VERSION' | translate:lang}} <strong>{{_appVersion}}</strong></span>
+    </button>
+    <button mat-menu-item [matMenuTriggerFor]="translationMenu" fxHide="true" fxShow.xs>
+      <mat-icon>translate</mat-icon>
+      <span>{{'APP.HEADER.TRANSLATE' | translate:lang}}</span>
+    </button>
+    <button mat-menu-item (click)="changeTheme()" fxHide="true" fxShow.xs>
+      <mat-icon>format_color_fill</mat-icon>
+      <span>{{'APP.HEADER.THEME' | translate:lang}}</span>
+    </button>
+    <a target="_blank" mat-menu-item href="https://twitter.com/aloketewary">
+      <mat-icon svgIcon="twitter"></mat-icon>
+      <span>{{'APP.HEADER.TWITTER' | translate:lang}}</span>
+    </a>
+    <a target="_blank" mat-menu-item href="https://github.com/aloketewary/DevDesignerTool">
+      <mat-icon svgIcon="github-circle"></mat-icon>
+      <span>{{'APP.HEADER.GITHUB' | translate:lang}}</span>
+    </a>
+  </mat-menu>
   <!-- <span>Right Aligned Text</span> -->
 </mat-toolbar>
-<!-- <ng-container *ngIf="(asyncTabs | async) === null">
+<ng-container *ngIf="asyncTabs?.length === 0">
   Loading tabs...
-</ng-container> -->
+</ng-container>
 
-<nav mat-tab-nav-bar mat-stretch-tabs [color]="'primary'" [backgroundColor]="'accent'" class="flex-full">
+<nav mat-tab-nav-bar mat-stretch-tabs [color]="'primary'" [backgroundColor]="'accent'" [ngClass]="{'flex-full': true, 'f family-poppins': lang==='1wKD' }">
   <a mat-tab-link *ngFor="let tab of asyncTabs" (click)="gotoRoute(tab)" [active]="state.activeTab == tab">
     {{tab?.label | translate:lang}}
   </a>

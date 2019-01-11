@@ -1,26 +1,19 @@
-import { SearchPipe } from './../../pipe/search.pipe';
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { SharedRoutingModule } from './shared-routing.module';
-import { LoaderComponent } from 'src/app/shared/components/loader/loader.component';
-import {
-  MatSnackBarModule,
-  MatToolbarModule,
-  MatButtonModule,
-  MatIconModule,
-  MatTabsModule,
-  MatCardModule,
-  MatDividerModule,
-  MatTooltipModule,
-  MatListModule,
-  MatBottomSheetModule,
-  MatProgressBarModule,
-  MatInputModule,
-  MatMenuModule
-} from '@angular/material';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { TranslationModule } from 'angular-l10n';
+import { LoaderComponent } from 'src/app/shared/components/loader/loader.component';
+
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
+import {
+    MatBottomSheetModule, MatButtonModule, MatCardModule, MatDialogModule, MatDividerModule,
+    MatIconModule, MatInputModule, MatListModule, MatMenuModule, MatProgressBarModule,
+    MatSnackBarModule, MatTabsModule, MatToolbarModule, MatTooltipModule
+} from '@angular/material';
+
+import { SearchPipe } from '../../pipe/search.pipe';
+import { SharedRoutingModule } from './shared-routing.module';
 
 @NgModule({
   imports: [
@@ -41,7 +34,9 @@ import { FormsModule } from '@angular/forms';
     MatProgressBarModule,
     MatInputModule,
     MatMenuModule,
-    TranslationModule
+    TranslationModule,
+    MatDialogModule,
+    DragDropModule
   ],
   declarations: [
     LoaderComponent,
@@ -65,7 +60,9 @@ import { FormsModule } from '@angular/forms';
     MatInputModule,
     SearchPipe,
     MatMenuModule,
-    TranslationModule
+    TranslationModule,
+    MatDialogModule,
+    DragDropModule
   ]
 })
 export class SharedModule { }

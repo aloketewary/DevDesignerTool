@@ -20,22 +20,23 @@
             "tsConfig": "src/tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "manifest.json"
             ],
             "styles": [
               "src/styles.css",
               "src/themes/dev-designer-tool.theme.scss"
             ],
-            "scripts": []
+            "scripts": [{
+              "input": "node_modules/document-register-element/build/document-register-element.js"
+            }]
           },
           "configurations": {
             "production": {
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
-                }
-              ],
+              "fileReplacements": [{
+                "replace": "src/environments/environment.ts",
+                "with": "src/environments/environment.prod.ts"
+              }],
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
@@ -96,7 +97,7 @@
         }
       }
     },
-    "MaterialColorTool-e2e": {
+    "DevDesignerTool-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "architect": {

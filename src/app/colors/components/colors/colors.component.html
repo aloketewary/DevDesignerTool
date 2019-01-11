@@ -1,42 +1,117 @@
-<div class="inner-content">
-  <!-- <div fxLayout="row" fxLayoutAlign="start center" class="flex-full"> -->
-  <div fxLayout="column" fxLayoutAlign="center start" class="flex-full margin-10-t margin-10-lr">
-    <div fxLayout="column" fxLayoutAlign="center start" fxLayoutWrap class="flex-full" *ngFor="let matCol of materialColors; let i=index">
-      <div fxLayout="row" fxLayoutAlign="start center" class="flex-full">
-        <span class="f size-25 family-lato weight-300 padding-10">{{matCol.color | uppercase}}</span>
-      </div>
-      <div fxLayout="row" fxLayoutAlign="start center">
-        <div [ngClass]="{'card margin-1 mat-elevation-z2': true, 'round': col == clickedPrimary}" [style.background-color]="col.hex"
-          *ngFor="let col of matCol.variations;" (mouseenter)="matElevationAdd($event)" (mouseleave)="matElevationRemove($event)"
-          (click)="cardClicked(col)">
-          <div class="container">
-            <div fxLayout="row" fxLayoutAlign="center center" class="flex-full">
-              <ng-container *ngIf="col == clickedPrimary; then thenTemplate; else elseTemplate"></ng-container>
-              <ng-template #thenTemplate>
-                <span class="margin-8-t f size-25 family-lato weight-700 col-white" [style.color]="col.color">P</span>
-              </ng-template>
-              <ng-template #elseTemplate>
-                <span class="margin-13-t f size-16 family-lato weight-300" [style.color]="col.color">{{col.weight}}</span>
-              </ng-template>
+<div ngClass="inner-content" ngClass.lt-md="inner-content small">
+  <div fxLayout.gt-sm="row" fxLayoutAlign.gt-sm="start start" fxLayout="column" fxLayoutAlign="center start" class="flex-full">
+    <div fxLayout="column" fxLayoutAlign="center start" class="flex-full margin-10-t margin-10-lr" fxFlex="100"
+      fxFlex.gt-sm="60">
+      <div fxLayout="column" fxLayoutAlign="center start" fxLayoutWrap class="flex-full" *ngFor="let matCol of materialColors; let i=index">
+        <div fxLayout="row" fxLayoutAlign="start center" class="flex-full">
+          <span class="f size-25 family-lato weight-300 padding-10" [style.color]="matCol.color">{{matCol.color |
+            uppercase}}</span>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="start center" class="under-card">
+          <div [ngClass]="{'card margin-1 mat-elevation-z2 margin-5-tb': true, 'round': col == clickedPrimary}"
+            [style.background-color]="col.hex" *ngFor="let col of matCol.variations;" (mouseenter)="matElevationAdd($event)"
+            (mouseleave)="matElevationRemove($event)" (click)="cardClicked(matCol.color, col)">
+            <div class="container">
+              <div fxLayout="row" fxLayoutAlign="center center" class="flex-full">
+                <ng-container *ngIf="col == clickedPrimary; then thenTemplate; else elseTemplate"></ng-container>
+                <ng-template #thenTemplate>
+                  <span [ngClass]="{'margin-8-t f size-25 family-lato weight-700': true, 'col-white': checkForDarkColor(col?.weight)}"
+                    [style.color]="col.color">{{getTranslationText(col.isPrimary)}}</span>
+                </ng-template>
+                <ng-template #elseTemplate>
+                  <span class="margin-13-t f size-16 family-lato weight-300" [style.color]="col.color">{{col.weight}}</span>
+                </ng-template>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+    <div fxLayout="row" fxLayoutAlign="end center" [ngClass]="{'flex-full m-t-10 m-r-20': true}" *ngIf="clickedPrimary?.hex" [@enterAnimation]>
+      <mat-card ngClass="color-card" ngClass.gt-sm="color-card-float" [style.background-color]="checkForDarkColor(clickedPrimary?.weight) ? '#ffffff' : '#000000'">
+        <mat-toolbar [style.background-color]="clickedPrimary?.hex">
+          <span [ngClass]="{'f family-lato size-25': true, 'col-white': checkForDarkColor(clickedPrimary?.weight)}">{{colorName
+            | titlecase}} / {{clickedPrimary?.weight}}</span>
+        </mat-toolbar>
+        <mat-card-content class="card-content">
+          <div fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="5px">
+            <div fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="5px" class="flex-full">
+              <span class="f family-lato size-12" [style.color]="clickedPrimary?.hex"><strong>HEX</strong></span>
+              <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px" class="flex-full" [style.color]="checkForDarkColor(clickedPrimary?.weight) ? '#000000' : '#ffffff'">
+                <span class="f fmaily-lato size-14">{{clickedPrimary?.hex | uppercase}}</span>
+                <span class="fill-remaining-space"></span>
+                <button mat-icon-button (click)="copyToClipboard(colorEventType.HEX, clickedPrimary?.hex)">
+                  <mat-icon>content_copy</mat-icon>
+                </button>
+              </div>
+            </div>
+            <div fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="5px" class="flex-full">
+              <span class="f family-lato size-12" [style.color]="clickedPrimary?.hex"><strong>RGB</strong></span>
+              <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px" class="flex-full" [style.color]="checkForDarkColor(clickedPrimary?.weight) ? '#000000' : '#ffffff'">
+                <span class="f fmaily-lato size-14">rgb({{colorInRGB[0]}}, {{colorInRGB[1]}}, {{colorInRGB[2]}})</span>
+                <span class="fill-remaining-space"></span>
+                <button mat-icon-button (click)="copyToClipboard(colorEventType.RGB)">
+                  <mat-icon>content_copy</mat-icon>
+                </button>
+              </div>
+            </div>
+            <div fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="5px" class="flex-full">
+              <span class="f family-lato size-12" [style.color]="clickedPrimary?.hex"><strong>CMYK</strong></span>
+              <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px" class="flex-full" [style.color]="checkForDarkColor(clickedPrimary?.weight) ? '#000000' : '#ffffff'">
+                <span class="f fmaily-lato size-14">{{hexToCMYK(clickedPrimary?.hex)}}</span>
+                <span class="fill-remaining-space"></span>
+                <button mat-icon-button (click)="copyToClipboard(colorEventType.CMYK, clickedPrimary.hex)">
+                  <mat-icon>content_copy</mat-icon>
+                </button>
+              </div>
+            </div>
+            <div fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="5px" class="flex-full">
+              <span class="f family-lato size-12" [style.color]="clickedPrimary?.hex"><strong>CSS Background Color</strong></span>
+              <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px" class="flex-full" [style.color]="checkForDarkColor(clickedPrimary?.weight) ? '#000000' : '#ffffff'">
+                <span class="f fmaily-lato size-14">background-color: rgba({{colorInRGB[0]}}, {{colorInRGB[1]}},
+                  {{colorInRGB[2]}}, 1);</span>
+                <span class="fill-remaining-space"></span>
+                <button mat-icon-button (click)="copyToClipboard(colorEventType.CSS)">
+                  <mat-icon>content_copy</mat-icon>
+                </button>
+              </div>
+            </div>
+            <!-- For Future use -->
+            <!-- <div fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="5px" class="flex-full">
+              <span class="f family-lato size-12" [style.color]="clickedPrimary?.hex"><strong>Swift UIColor RGB</strong></span>
+              <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px" class="flex-full" [style.color]="checkForDarkColor(clickedPrimary?.weight) ? '#000000' : '#ffffff'">
+                <span class="f fmaily-lato size-14">UIColor(red: 1.000, green: 0.341, blue: 0.133, alpha: 1.0)</span>
+                <span class="fill-remaining-space"></span>
+                <button mat-icon-button>
+                  <mat-icon>content_copy</mat-icon>
+                </button>
+              </div>
+            </div> -->
+            <div fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="5px" class="flex-full">
+              <span class="f family-lato size-12" [style.color]="clickedPrimary?.hex"><strong>Materialize
+                  css（background color）</strong></span>
+              <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px" class="flex-full" [style.color]="checkForDarkColor(clickedPrimary?.weight) ? '#000000' : '#ffffff'">
+                <span class="f fmaily-lato size-14">{{getMaterializeCssText(true)}}</span>
+                <span class="fill-remaining-space"></span>
+                <button mat-icon-button (click)="copyToClipboard(colorEventType.MAT_BACK_CSS)">
+                  <mat-icon>content_copy</mat-icon>
+                </button>
+              </div>
+            </div>
+            <div fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="5px" class="flex-full">
+              <span class="f family-lato size-12" [style.color]="clickedPrimary?.hex"><strong>Materialize css（text
+                  color）</strong></span>
+              <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="10px" class="flex-full" [style.color]="checkForDarkColor(clickedPrimary?.weight) ? '#000000' : '#ffffff'">
+                <span class="f fmaily-lato size-14">{{getMaterializeCssText(false)}}</span>
+                <span class="fill-remaining-space"></span>
+                <button mat-icon-button (click)="copyToClipboard(colorEventType.MAT_TEXT_CSS)">
+                  <mat-icon>content_copy</mat-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
   </div>
-  <div fxLayout="row" fxLayoutAlign="end center" class="flex-full">
-    <mat-card class="example-card" [style.background-color]="clickedPrimary?.hex">
-      <mat-card-header>
-        <mat-card-title>{{clickedPrimary?.color}}</mat-card-title>
-
-      </mat-card-header>
-
-      <mat-card-content>
-        <p>
-
-        </p>
-      </mat-card-content>
-    </mat-card>
-  </div>
-  <!-- </div> -->
 </div>

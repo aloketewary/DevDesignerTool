@@ -1,4 +1,5 @@
-import { Language } from 'angular-l10n';
+import { LanguageDataModel } from './../../model/language.model';
+import { Language, LocaleService } from 'angular-l10n';
 import { ConfigLoaderService } from 'src/app/config-loader.service';
 
 import { animate, style, transition, trigger } from '@angular/animations';
@@ -7,6 +8,7 @@ import { Component, NgZone, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 
 import { Config } from '../../../models/config';
+import { Constants } from '../../class/constants';
 import { StateManager } from '../../class/state-manager';
 import { MainTabs } from '../../model/main-tabs';
 import { UiService } from '../../services/ui.service';
@@ -40,26 +42,30 @@ export class HeaderComponent implements OnInit {
   private readonly SHRINK_TOP_SCROLL_POSITION = 15;
   shrinkToolbar = false;
   _appVersion = appVersion;
+  languageList: Array<LanguageDataModel>;
   constructor(
     private route: Router,
     public state: StateManager,
     configLoader: ConfigLoaderService,
     private uiService: UiService,
     private scrollDispatcher: ScrollDispatcher,
-    private ngZone: NgZone
+    private ngZone: NgZone,
+    public locale: LocaleService
   ) {
     this.config = configLoader.getConfigData();
+    this.languageList = new Array<LanguageDataModel>(0);
   }
 
   ngOnInit() {
     this.uiService.getMainTabs().subscribe((tabs: MainTabs[]) => {
       this.asyncTabs = tabs;
       tabs.forEach(refLink => {
-        if (refLink.href === this.currentUrl) {
+        if (refLink.href === JSON.parse(localStorage.getItem(Constants.ACTIVE_TAB_KEY)).href) {
           this.state.activeTab = refLink;
         }
       });
     });
+    this.uiService.getLanguageData().subscribe(langData => this.languageList = langData);
     this.route.events.subscribe((_: NavigationEnd) => {
       this.currentUrl = this.currentUrl || _.url;
     });
@@ -70,6 +76,7 @@ export class HeaderComponent implements OnInit {
 
   gotoRoute(routelink: MainTabs) {
     this.state.activeTab = routelink;
+    localStorage.setItem(Constants.ACTIVE_TAB_KEY, JSON.stringify(routelink));
     this.route.navigate([routelink.href]);
   }
 
@@ -88,5 +95,9 @@ export class HeaderComponent implements OnInit {
     } else {
       localStorage.removeItem('devTheme');
     }
+  }
+
+  selectLanguage(language: string): void {
+    this.locale.setCurrentLanguage(language);
   }
 }

@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="header">Colors</div>
+  <section class="color-list flex-full p-10-lr p-10-tb">
+    <ng-container *ngFor="let colors of popupColorsList">
+    <div class="color-block mat-elevation-z8" *ngIf="colors.variations?.length > 0" (click)="selectedColor(colors)">
+      <div class="colors">
+        <span [style.background-color]="variation?.hex" *ngFor="let variation of colors.variations"></span>
+      </div>
+      <h3 class="f family-lato size-12 weight-300">{{colors.color}}</h3>
+      <ul *ngIf="isPrimaryColors">
+        <li *ngFor="let variation of colors.variations">{{variation.weight === '500' ? 'primary': 'primary-dark'}}</li>
+      </ul>
+      <ul *ngIf="!isPrimaryColors">
+        <li *ngFor="let variation of colors.variations">{{variation.weight === 'A200' ? 'accent': 'accent-dark'}}</li>
+      </ul>
+    </div>
+    </ng-container>
+  </section>
+</div>

@@ -6,6 +6,15 @@
         &-roboto {
             font-family: 'Roboto', sans-serif !important;
         }
+        &-poppins {
+            font-family: 'Poppins', sans-serif!important;
+        }
+        &-kaushan {
+            font-family: 'Kaushan Script', cursive!important;
+        }
+        &-mplusround {
+            font-family: 'M PLUS Rounded 1c', sans-serif !important;
+        }
     }
     &.style {
         &-normal {
@@ -26,7 +35,6 @@
         }
     }
 }
-
 
 .bg-red {
     background-color: #F44336 !important;

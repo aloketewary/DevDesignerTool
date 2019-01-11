@@ -1,0 +1,56 @@
+<div ngClass.gt-xs="inner-content" ngClass="inner-content small">
+  <ng-container *ngIf="media.isActive('xs'); else elseTemplate">
+    <div fxLayout="row" fxLayoutAlign="space-evenly start" fxLayoutGap="10px" class="under-card">
+      <div class="card" *ngFor="let colorData of selectedColorList; let i = index" (swipeleft)="swipe($event.type, i)"
+        (swiperight)="swipe($event.type, i)" cdkDrag>
+        <div class="card__header flex-full" [style.background-color]="colorData.headerColor.hex">
+          <span class="fill-remaining-space"></span>
+          <button mat-icon-button class="close-btn" (click)="removeSelectedPallete(colorData)" matTooltip="remove this pallete"
+            matTooltipPosition="above">
+            <mat-icon class="col-white">close</mat-icon>
+          </button>
+        </div>
+        <button class="fab" [style.background-color]="colorData.fabColor.hex" matTooltip="Download this pallete"
+          matTooltipPosition="above">
+          <i class="material-icons">file_download</i>
+        </button>
+        <div class="card__content">CLOSE ME</div>
+      </div>
+      <div class="card" *ngIf="ifAdd">
+        <div class="card__header" [style.background-color]="primaryColor.variations[0]?.hex" (click)="openPrimaryColors()"></div>
+        <button class="fab" [style.background-color]="accentColor.variations[0]?.hex" (click)="openAccentColors()"></button>
+        <div class="card__content">CLOSE ME</div>
+      </div>
+    </div>
+  </ng-container>
+  <ng-template #elseTemplate>
+    <div fxLayout="row" fxLayoutAlign="space-evenly start" fxLayoutGap="10px" class="under-card" cdkDropList
+      cdkDropListOrientation="horizontal" (cdkDropListDropped)="drop($event)">
+      <div class="card" *ngFor="let colorData of selectedColorList" cdkDrag>
+        <div class="card__header flex-full" [style.background-color]="colorData.headerColor.hex">
+          <span class="fill-remaining-space"></span>
+          <button mat-icon-button class="close-btn" (click)="removeSelectedPallete(colorData)" matTooltip="remove this pallete"
+            matTooltipPosition="above">
+            <mat-icon class="col-white">close</mat-icon>
+          </button>
+        </div>
+        <button class="fab" [style.background-color]="colorData.fabColor.hex" matTooltip="Download this pallete"
+          matTooltipPosition="above">
+          <i class="material-icons">file_download</i>
+        </button>
+        <div class="card__content">CLOSE ME</div>
+      </div>
+      <div class="card" *ngIf="ifAdd">
+        <div class="card__header" [style.background-color]="primaryColor.variations[0]?.hex" (click)="openPrimaryColors()"></div>
+        <button class="fab" [style.background-color]="accentColor.variations[0]?.hex" (click)="openAccentColors()"></button>
+        <div class="card__content">CLOSE ME</div>
+      </div>
+    </div>
+  </ng-template>
+
+  <button mat-fab (click)="fabButtonEventHandler(ifAdd)" class="fab-bottom-right" [disabled]="isButtonDisabled()"
+    [matTooltip]="ifAdd ? 'Save' : 'Add'" matTooltipPosition="above">
+    <mat-icon>{{ifAdd ? 'save' : 'add'}}</mat-icon>
+  </button>
+  <!-- <app-speed-dial-fab [disabled]="!isButtonDisabled()" (actionEvent)="fabButtonEventHandler($event)"></app-speed-dial-fab> -->
+</div>

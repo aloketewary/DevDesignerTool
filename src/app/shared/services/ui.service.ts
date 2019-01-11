@@ -1,3 +1,6 @@
+import { PopColorsModel } from './../../palletes/model/popup-color.model';
+import { LanguageDataModel } from './../model/language.model';
+import { ColorsModel } from './../../colors/models/colors.model';
 import { AboutModel } from './../../about/model/about.model';
 import { FontsData } from './../../fonts/models/fonts-data';
 import { IconsList } from './../../icons/models/icon-data';
@@ -31,7 +34,7 @@ export class UiService {
   }
 
   public getIconsData(url: string): Observable<IconData[]> {
-    return this.http.get<IconData[]>(url)
+    return this.http.get<IconData[]>(url, HttpOptions)
       .pipe(
         retry(3), // retry a failed request up to 3 times
         map((icon: any) => icon.categories),
@@ -40,7 +43,7 @@ export class UiService {
   }
 
   public getMainTabs(): Observable<MainTabs[]> {
-    return this.http.get<MainTabs[]>(this.config['MAIN_TABS_URL'])
+    return this.http.get<MainTabs[]>(this.config['MAIN_TABS_URL'], HttpOptions)
       .pipe(
         retry(3), // retry a failed request up to 3 times
         catchError(this.handleError) // then handle the error
@@ -48,7 +51,7 @@ export class UiService {
   }
 
   public getIconsList(): Observable<IconsList[]> {
-    return this.http.get<IconsList[]>(this.config['ICONS_LIST_URL'])
+    return this.http.get<IconsList[]>(this.config['ICONS_LIST_URL'], HttpOptions)
       .pipe(
         retry(3), // retry a failed request up to 3 times
         // map((icon: any) => icon.categories),
@@ -62,7 +65,7 @@ export class UiService {
   }
 
   public getFontsData(): Observable<FontsData[]> {
-    return this.http.get<FontsData[]>(this.config['FONTS_DATA_URL'])
+    return this.http.get<FontsData[]>(this.config['FONTS_DATA_URL'], HttpOptions)
       .pipe(
         retry(3), // retry a failed request up to 3 times
         // map((icon: any) => icon.categories),
@@ -71,13 +74,41 @@ export class UiService {
   }
 
   public getChangeLog(): Observable<AboutModel[]> {
-    return this.http.get<AboutModel[]>(this.config['ABOUT_DATA_URL'])
-    .pipe(
-      retry(3), // retry a failed request up to 3 times
-      // map((icon: any) => icon.categories),
-      catchError(this.handleError) // then handle the error
-    );
+    return this.http.get<AboutModel[]>(this.config['ABOUT_DATA_URL'], HttpOptions)
+      .pipe(
+        retry(3), // retry a failed request up to 3 times
+        // map((icon: any) => icon.categories),
+        catchError(this.handleError) // then handle the error
+      );
   }
+
+  public getColorsData(): Observable<ColorsModel[]> {
+    return this.http.get<ColorsModel[]>(this.config['COLORS_DATA_URL'], HttpOptions)
+      .pipe(
+        retry(3), // retry a failed request up to 3 times
+        // map((icon: any) => icon.categories),
+        catchError(this.handleError) // then handle the error
+      );
+  }
+
+  public getLanguageData(): Observable<LanguageDataModel[]> {
+    return this.http.get<LanguageDataModel[]>(this.config['LANG_DATA_URL'], HttpOptions)
+      .pipe(
+        retry(3), // retry a failed request up to 3 times
+        // map((icon: any) => icon.categories),
+        catchError(this.handleError) // then handle the error
+      );
+  }
+
+  public getPopupColorsData(): Observable<PopColorsModel[]> {
+    return this.http.get<PopColorsModel[]>(this.config['POPUP_COLOR_DATA'], HttpOptions)
+      .pipe(
+        retry(3), // retry a failed request up to 3 times
+        // map((icon: any) => icon.categories),
+        catchError(this.handleError) // then handle the error
+      );
+  }
+
   public handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.

@@ -13,9 +13,9 @@
               <mat-nav-list>
                 <mat-list-item (click)="selectedList(list)" [ngClass]="{'col-gradient': true,  'always': list != selectedIconList, 'selected': list == selectedIconList }"
                   *ngFor="let list of iconsList">
-                  <h1 matLine class="f weight-500 size-20">{{list.name}}</h1>
-                  <p matLine class="f weight-300 size-14">{{list.desc}}</p>
-                  <p matLine class="f weight-300 size-12">{{'ICONS.ICONS_LIST.GROUP.BY' | translate:lang}} <strong>{{list.author}}</strong></p>
+                  <h1 matLine class="f weight-500 size-20">{{list.name | translate:lang}}</h1>
+                  <p matLine class="f weight-300 size-14">{{list.desc | translate:lang}}</p>
+                  <p matLine class="f weight-300 size-12">{{'ICONS.ICONS_LIST.GROUP.BY' | translate:lang}} <strong>{{list.author | translate:lang}}</strong></p>
                   <button mat-icon-button>
                     <mat-icon>keyboard_arrow_right</mat-icon>
                   </button>
