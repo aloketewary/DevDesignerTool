@@ -1,0 +1,9 @@
+.root-container {
+  flex-direction: column;
+  box-sizing: border-box;
+  display: flex;
+  flex: 1;
+  position: relative;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}

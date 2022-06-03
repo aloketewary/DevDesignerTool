@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'ddt-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  templateUrl: './ddt-app.component.html',
+  styleUrls: ['./ddt-app.component.scss']
 })
-export class AppComponent {
+export class DdtAppComponent {
   title = 'DevDesignerTools';
 }

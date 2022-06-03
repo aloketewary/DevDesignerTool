@@ -1,0 +1,28 @@
+<div fxLayout="column" fxLayout.gt-sm="row" fxLayout.gt-sm="space-evenly center" fxLayoutAlign="center center"
+  fxLayoutGap="10px" class="height-100 width-100" fxFlex.gt-sm="100">
+
+  <img src="../assets/images/app-logo.png" alt="logo" ngClass="app-logo-mobile" [fxHide.gt-sm]="true" />
+  <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
+    <div [fxHide.gt-sm]="true" fxFlex="5"></div>
+    <div fxLayout="column" fxLayoutAlign.gt-sm="center start" fxLayoutAlign="center center" fxLayoutGap="10px"
+      fxFlex.gt-sm="70">
+      <div ngClass="mat-title col-red" ngClass.gt-sm="mat-headline col-red">periphex</div>
+      <div class="mat-display-3">Dev Designer Tools</div>
+      <div ngClass="mat-subheading-2 text-center" ngClass.gt-sm="mat-subheading-2">Reusable tested tools to build robust
+        Angular applications in quick time</div>
+      <button mat-raised-button color="primary" class="m-t-20 animation-slide-in-left"> <span class="mat-caption">GET
+          STARTED </span>
+        <mat-icon>arrow_forward</mat-icon>
+      </button>
+      <!-- Place this tag where you want the button to render. -->
+      <a class="github-button" href="https://github.com/aloketewary/DevDesignerTool"
+        data-color-scheme="no-preference: light; light: light; dark: dark;" data-size="large" data-show-count="true"
+        aria-label="Star aloketewary/DevDesignerTool on GitHub">Star</a>
+    </div>
+    <div [fxHide.gt-sm]="true" fxFlex="5"></div>
+  </div>
+  <div class="m-l-5p">
+    <img src="../assets/images/app-logo.png" alt="logo" ngClass="app-logo-desktop" [fxHide.lt-md]="true" />
+  </div>
+
+</div>

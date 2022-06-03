@@ -1,0 +1,76 @@
+// Import all the tools needed to customize the theme and extract parts of it
+@import "~@angular/material/theming";
+
+@mixin setMatColors($theme, $isDark) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+
+  .content {
+    display: inline-block;
+    padding: 7px 16px;
+
+    & .text {
+      font-size: 13px;
+      margin-top: 11px;
+      color: isDark($isDark);
+    }
+
+    & .number {
+      font-weight: normal;
+      font-size: 26px;
+      margin-top: 2px;
+      color: isDark($isDark);
+    }
+
+    & .number-gt-xs {
+      font-weight: normal;
+      font-size: 26px;
+      margin-top: 30px;
+      color: isDark($isDark);
+      text-align: center;
+    }
+  }
+}
+
+@function set-text-color($color) {
+  @if (lightness($color) > 50) {
+    @return #000000 is-important(true); // Lighter backgorund, return dark color
+  } @else {
+    @return #ffffff is-important(true); // Darker background, return light color
+  }
+}
+
+@function gradient($color1, $color2) {
+  @return linear-gradient(to bottom right, $color1, $color2);
+}
+
+@function gradient-color($color) {
+  @return set-text-color($color);
+}
+
+@function getMatColors($type) {
+  @if ($type == "primary") {
+    @return $primary-color;
+  }
+
+  @if ($type == "accent") {
+    @return $accent-color;
+  }
+
+  @if ($type == "warn") {
+    @return $warn-color;
+  }
+}
+
+@function isDark($dark) {
+  @if ($dark == "false") {
+    @return #000000; // Lighter backgorund, return dark color
+  } @else {
+    @return #ffffff; // Darker background, return light color
+  }
+}
+
+@function is-important($important) {
+  @return #{if($important, "!important", "")};
+}

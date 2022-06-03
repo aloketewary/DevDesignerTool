@@ -1,0 +1,289 @@
+@import "helper.scss";
+
+%text {
+  color: #fff !important;
+}
+
+%content {
+  border: 1px solid #ccc;
+  padding: 10px;
+  color: #333;
+  & .text,
+  .number {
+    @extend %text;
+  }
+}
+
+.bg {
+  &-red {
+    background-color: #f44336 !important;
+    color: #fff;
+    & .content {
+      @extend %content;
+    }
+    &-gradient {
+      background: gradient(#f44336, #d32f2f);
+      color: gradient-color(#f44336);
+    }
+  }
+  &-pink {
+    background-color: #e91e63 !important;
+    color: #fff;
+    & .content {
+      @extend %content;
+    }
+  }
+  //New Pink Color Added Here
+  &-light-pink {
+    background-color: #ffd1e0 !important;
+    color: #fff;
+    & .content {
+      @extend %content;
+    }
+  }
+
+  &-purple {
+    background-color: #9c27b0 !important;
+    color: #fff;
+    & .content {
+      @extend %content;
+    }
+  }
+
+  &-deep-purple {
+    background-color: #673ab7 !important;
+    color: #fff;
+    & .content {
+      @extend %content;
+    }
+  }
+
+  &-indigo {
+    background-color: #3f51b5 !important;
+    color: #fff;
+    & .content {
+      @extend %content;
+    }
+  }
+
+  &-blue {
+    background-color: #2196f3 !important;
+    color: #fff;
+    & .content {
+      @extend %content;
+    }
+    &-gradient {
+      background: gradient(#2196f3, #1976d2);
+      color: gradient-color(#2196f3);
+    }
+  }
+
+  &-light-blue {
+    background-color: #03a9f4 !important;
+    color: #fff;
+    & .content {
+      @extend %content;
+    }
+    &-gradient {
+      background: gradient(#e3f2fd, #90caf9);
+      color: gradient-color(#90caf9);
+    }
+  }
+
+  &-cyan {
+    background-color: #00bcd4 !important;
+    color: #fff;
+    & .content {
+      @extend %content;
+    }
+  }
+
+  &-teal {
+    background-color: #009688 !important;
+    color: #fff;
+    & .content {
+      @extend %content;
+    }
+    &-gradient {
+      background: gradient(#009688, #00796b);
+      color: gradient-color(#009688);
+    }
+  }
+
+  &-green {
+    background-color: #4caf50 !important;
+    color: #fff;
+    & .content {
+      @extend %content;
+    }
+    &-gradient {
+      background: gradient(#8bc34a, #689f38);
+      color: gradient-color(#8bc34a);
+    }
+  }
+
+  &-light-green {
+    background-color: #8bc34a !important;
+    color: #fff;
+    & .content {
+      @extend %content;
+    }
+  }
+
+  &-lime {
+    background-color: #cddc39 !important;
+    color: #fff;
+    & .content {
+      @extend %content;
+    }
+  }
+
+  &-yellow {
+    background-color: #ffe821 !important;
+    color: #fff;
+    & .content {
+      @extend %content;
+    }
+  }
+
+  &-amber {
+    background-color: #ffc107 !important;
+    color: #fff;
+    & .content {
+      @extend %content;
+    }
+    &-gradient {
+      background: gradient(#ffc107, #ffa000);
+      color: gradient-color(#ffc107);
+    }
+  }
+
+  &-orange {
+    background-color: #ff9800 !important;
+    color: #fff;
+    & .content {
+      @extend %content;
+    }
+  }
+
+  &-deep-orange {
+    background-color: #ff5722 !important;
+    color: #fff;
+    & .content {
+      @extend %content;
+    }
+  }
+
+  &-brown {
+    background-color: #795548 !important;
+    color: #fff;
+    & .content {
+      @extend %content;
+    }
+  }
+
+  &-grey {
+    background-color: #9e9e9e !important;
+    color: #fff;
+    & .content {
+      @extend %content;
+    }
+  }
+
+  &-blue-grey {
+    background-color: #607d8b !important;
+    color: #fff;
+
+    & .content {
+      @extend %content;
+    }
+  }
+
+  &-black {
+    background-color: #000000 !important;
+    color: #fff;
+    & .content {
+      @extend %content;
+    }
+  }
+  &-white {
+    background-color: #ffffff !important;
+    color: #fff;
+  }
+  &-extra-light-green {
+    background-color: #ddfcd6 !important;
+    color: #fff;
+  }
+}
+
+.col {
+  &-red {
+    color: #f44336 !important;
+  }
+  &-pink {
+    color: #e91e63 !important;
+  }
+  &-purple {
+    color: #9c27b0 !important;
+  }
+  &-deep-purple {
+    color: #673ab7 !important;
+  }
+  &-indigo {
+    color: #3f51b5 !important;
+  }
+  &-blue {
+    color: #2196f3 !important;
+  }
+  &-light-blue {
+    color: #03a9f4 !important;
+  }
+  &-cyan {
+    color: #00bcd4 !important;
+  }
+  &-teal {
+    color: #009688 !important;
+  }
+  &-green {
+    color: #4caf50 !important;
+  }
+  &-light-green {
+    color: #8bc34a !important;
+  }
+  &-lime {
+    color: #cddc39 !important;
+  }
+  &-yellow {
+    color: #ffe821 !important;
+  }
+  &-amber {
+    color: #ffc107 !important;
+  }
+  &-orange {
+    color: #ff9800 !important;
+  }
+  &-deep-orange {
+    color: #ff5722 !important;
+  }
+  &-brown {
+    color: #795548 !important;
+  }
+  &-grey {
+    color: #9e9e9e !important;
+  }
+  &-blue-grey {
+    color: #607d8b !important;
+  }
+  &-black {
+    color: #000000 !important;
+  }
+  &-white {
+    color: #ffffff !important;
+  }
+  &-font-green {
+    color: #109115 !important;
+  }
+  &-light-brown {
+    color: #815849 !important;
+  }
+}

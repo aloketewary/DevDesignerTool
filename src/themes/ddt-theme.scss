@@ -1,0 +1,77 @@
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '@angular/material' as mat;
+// Plus imports for other components in your app.
+@import "./variables/spacemanager.scss";
+@import "./variables/utils.scss";
+@import "./variables/colors.scss";
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@300;400;500;700&display=swap');
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+$typography-configuration: mat-typography-config(
+  $font-family: "'Dosis', sans-serif",
+  $display-4: mat.define-typography-level(112px, 112px, 300, $letter-spacing: -0.05em),
+  $display-3: mat.define-typography-level(56px, 56px, 400, $letter-spacing: -0.02em),
+  $display-2: mat.define-typography-level(45px, 48px, 400, $letter-spacing: -0.005em),
+  $display-1: mat.define-typography-level(34px, 40px, 400),
+  $headline:  mat.define-typography-level(24px, 32px, 400),
+  $title: mat.define-typography-level(24px, 28px, 500),
+  $subheading-2: mat.define-typography-level(24px, 28px, 400),
+  $subheading-1: mat.define-typography-level(20px, 24px, 400),
+  $body-2: mat.define-typography-level(20px, 24px, 500),
+  $body-1: mat.define-typography-level(20px, 22px, 400),
+  $caption: mat.define-typography-level(18px, 22px, 400),
+  $button: mat.define-typography-level(14px, 22px, 500),
+  $input: mat.define-typography-level(12px, 1.125, 400)
+);
+
+@include angular-material-typography($typography-configuration);
+@include mat.core($typography-configuration);
+
+@mixin mat-core($typography-config: null) {
+  @include angular-material-typography($typography-config);
+  @include mat-ripple();
+  @include cdk-a11y();
+  @include cdk-overlay();
+  @include cdk-text-field();
+}
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$DevDesignerTools-primary: mat.define-palette(mat.$indigo-palette);
+$DevDesignerTools-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$DevDesignerTools-warn: mat.define-palette(mat.$red-palette);
+
+$dev-designer-tool-config: mat.define-typography-config(
+  $font-family: "'Dosis', sans-serif"
+);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$DevDesignerTools-theme: mat.define-dark-theme((
+  color: (
+    primary: $DevDesignerTools-primary,
+    accent: $DevDesignerTools-accent,
+    warn: $DevDesignerTools-warn,
+  ),
+  typography: $dev-designer-tool-config,
+));
+
+
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($DevDesignerTools-theme);
+
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; background-color: rgb(238, 238, 238); }
+body { margin: 0; font-family: 'Dosis', sans-serif; }
+.spacer {
+  flex: 1 1 auto;
+}
